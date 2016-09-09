@@ -10,7 +10,7 @@
     var listChannels = function(){
       return $http.get("https://apx.cisco.com/spvss/infinitehome/infinitetoolkit/v_sandbox_1/channels",  {
         headers: {
-          Authorization: "Bearer "+authentication.getToken()
+          Authorization: "Bearer "+authentication.getAccessToken()
         }
         });
     };

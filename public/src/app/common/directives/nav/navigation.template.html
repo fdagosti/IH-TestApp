@@ -11,19 +11,16 @@
     <div id="navbar-main" class="collapse navbar-collapse">
     
       <ul class="nav navbar-nav navbar-right">  
-        <li ng-hide="false"><a href="/#login/?page={{navvm.currentPath()}}" data-toggle="collapse" data-target=".navbar-collapse">login</a></li>
-        <li class="dropdown">
-          <a href="" class="dropdown-toggle" data-toggle="dropdown">Screens<span class="caret"></span></a>
+        <li ng-hide="navvm.isLoggedIn"><a href="/#login/?page={{navvm.currentPath()}}" data-toggle="collapse" data-target=".navbar-collapse">Login</a></li>
+        <li ng-show="navvm.isLoggedIn" class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">{{navvm.currentUser.client_id}}<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li ><a href="/#channels" >Channels</a></li>
-            <li ><a href="/#devices" >Devices</a></li>
-            <li ><a href="/#categories" >Categories</a></li>
-            <li ><a href="/#content" >Content</a></li>
-            <li ><a href="/#household" >household</a></li>
-            <li ><a href="/#platform" >platform</a></li>
+            <li ><a href="/#channels" >Channels Screen</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="" ng-click="navvm.logout()" data-toggle="collapse" data-target=".navbar-collapse">Logout</a></li>
           </ul>
         </li>
-        <li><a href="/#/" data-toggle="collapse" data-target=".navbar-collapse">A propos</a></li>
+        <li><a href="/#/" data-toggle="collapse" data-target=".navbar-collapse">About</a></li>
       </ul>
       
     </div>

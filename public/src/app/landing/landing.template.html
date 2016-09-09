@@ -10,9 +10,12 @@
 
       
       
-        <button ng-click="vm.login()" class="btn title-button hero-btn btn-lg btn-primary" >
-          Let's get it started  
-        </button>
+        <a ng-hide="vm.isLoggedIn" ng-href="/#login?page={{vm.returnPage}}" class="btn title-button hero-btn btn-lg btn-primary" >
+        Log into the Infinite Platform
+        </a>
+        <a ng-show="vm.isLoggedIn" ng-href="/#channels" class="btn title-button hero-btn btn-lg btn-primary" >
+          Channels
+        </a>
     </div>
   </div>
 </div>
