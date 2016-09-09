@@ -1,0 +1,41 @@
+<div class="container">
+  
+  <div class="page-header">
+    <h1>
+    Infinite EPG
+    <small>Your Channels</small></h1>
+  </div>
+  <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+  
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+    
+    <div class="row">
+      <div class="col-xs-12 list-group-item alert alert-info" ng-repeat="channel in vm.channels">
+
+          <span class="badge pull-left" ng-show="channel.isFavorite" >FAVORITE</span>
+          <h3 ><small>Channel Name</small>&nbsp;{{channel.name}}</h3>
+          <span class="pull-right" ng-repeat="media in channel.media" ><img ng-src="{{media.uri}}" alt="">&nbsp;&nbsp;</span>
+          <h3 ><small>Channel Number</small>&nbsp;{{channel.logicalChannelNumber}}  </h3>
+          
+          <p><small>Channel ID</small> <strong>{{channel.id}}</strong></p>
+  
+      </div>
+      <p class="lead" ng-show="vm.tickets.length ===0">No channels...</p>
+    </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <p class="lead">This screens display all the information that is provided by the "Channels" URL on IH
+      </p>
+      <button class="btn btn-primary" data-toggle="collapse" data-target="#demo">Show Raw JSON</button>
+      <p></p>
+      <div id="demo" class="collapse">
+        <pre>
+          {{vm.rawData | json}}
+        </pre>
+      </div>
+    </div>
+    
+
+  </div>
+</div>

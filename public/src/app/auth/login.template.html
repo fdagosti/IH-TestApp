@@ -1,0 +1,22 @@
+
+<div class="container">
+    <page-header content="vm.pageHeader"></page-header>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <p class="lead">You do not yet have credentials? Follow the <a target="_blank" href="https://developer.cisco.com/site/infinite-toolkit/documents/cloud/#cloud-api-overview">ITK cloud APIs page</a> to declare your app through Mulesoft. <br>Alternatively, you can choose to <a ng-click="vm.loginWithDefaultCredentials()">login with default credentials</a></p>
+            <form ng-submit="vm.onSubmit()">
+                <div role="alert" ng-show="vm.formError" class="alert alert-danger">{{vm.formError}}</div>
+                <div class="form-group">
+                    <label for="client-id">Client ID</label>
+                    <input  class="form-control" id="client-id" placeholder="Enter your client ID" ng-model="vm.credentials.client_id">
+                </div>
+                <div class="form-group">
+                    <label for="secret">Client Secret</label>
+                    <input  class="form-control" id="secret" placeholder="Enter the Client Secret" ng-model="vm.credentials.client_secret">
+                </div>
+                <button type="submit" class="btn btn-primary">Log In</button>
+            </form>
+        </div>
+    </div>
+</div>

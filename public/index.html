@@ -1,0 +1,45 @@
+
+<!-- public/index.html -->
+<!doctype html>
+<html ng-app="InfiniteEPG" lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta charset="UTF-8">
+        <base href="/">
+
+        <title>Infinite EPG</title>
+
+        
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="libs/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="libs/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+
+        
+        
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+
+        <script src="libs/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+        
+        <script src="src/app/ngapp.js"></script>
+        <script src="src/app/landing/landing.controller.js"></script>
+        <script src="src/app/channels/channels.controller.js"></script>
+        <script src="src/app/auth/login.controller.js"></script>
+        <script src="src/app/common/directives/nav/navigation.directive.js"></script>
+        <script src="src/app/common/directives/nav/navigation.controller.js"></script>
+        <script src="src/app/common/directives/footer/footer.directive.js"></script>
+        <script src="src/app/common/directives/pageHeader/pageHeader.directive.js"></script>
+        
+
+        <!-- services -->
+        <script src="src/app/common/services/channels.service.js"></script>
+        <script src="src/app/common/services/authentication.service.js"></script>
+    </head>
+    <body>
+    <navigation></navigation>
+    
+    <div class="page" ng-view>   </div>
+    <appfooter></appfooter>
+    </body>
+</html>

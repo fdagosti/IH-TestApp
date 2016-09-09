@@ -1,0 +1,24 @@
+{
+  "name": "IHclient",
+  "homepage": "https://github.com/fdagosti/IH-TestApp",
+  "authors": [
+    "fdagosti <francois.dagostini@gmail.com>"
+  ],
+  "description": "A test app to validate the APIs on the IH product",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "font-awesome": "^4.6.3",
+    "jquery": "^3.1.0"
+  }
+}
