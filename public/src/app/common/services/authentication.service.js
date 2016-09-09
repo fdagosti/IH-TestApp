@@ -18,7 +18,9 @@
         };
 
         var getAccessToken = function(){
-            return getToken().access_token;
+            var t = getToken();
+
+            return t?getToken().access_token:"";
         }
 
         var login = function(credentials) {

@@ -11,7 +11,7 @@
         vm.rawData = response.data;
         
       }, function(error){
-        vm.error = error;
+        vm.error = error.data;
       });
       
     };
