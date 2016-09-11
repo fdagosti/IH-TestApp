@@ -5,13 +5,13 @@
     Infinite EPG
     <small>Your Channels</small></h1>
   </div>
+
   <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-  
+
   <div class="row">
     <div class="col-xs-12 col-sm-6">
     
-    <div class="row">
-      <div class="col-xs-12 list-group-item alert alert-info" ng-repeat="channel in vm.channels">
+      <div class="list-group-item alert alert-info" ng-repeat="channel in vm.channels">
 
           <span class="badge pull-left" ng-show="channel.isFavorite" >FAVORITE</span>
           <h3 ><small>Channel Name</small>&nbsp;{{channel.name}}</h3>
@@ -23,10 +23,53 @@
       </div>
       <p class="lead" ng-show="vm.tickets.length ===0">No channels...</p>
     </div>
-    </div>
     <div class="col-xs-12 col-sm-6">
       <p class="lead">This screens display all the information that is provided by the "Channels" URL on IH
       </p>
+
+   <uib-accordion close-others="oneAtATime">
+    <div uib-accordion-group class="panel-default" heading="Advanced Query Options" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+      <div class="panel-body">
+        <form ng-submit="vm.listChannels(vm.query)">
+          <div class="form-group">
+              <label for="channelid">Channel ID</label>
+              <input type="text" class="form-control" id="channelid" ng-model="vm.query.channelId" placeholder="Channel ID">
+            </div>  
+          <div class="form-group">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox1" ng-model="vm.query.isAdult" value="option1"> isAdult
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox2" ng-model="vm.query.isEntitled" value="option2"> isEntitled
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox3" ng-model="vm.query.isPlayable" value="option3"> isPlayable
+          </label>
+         </div> 
+           <div class="form-group">
+            <label for="limit">Limit</label>
+            <input type="number" class="form-control" ng-model="vm.query.limit" id="limit" placeholder="Limit">
+          </div>  
+           <div class="form-group">
+            <label for="lcn">Logical Channel Number</label>
+            <input type="text" class="form-control" id="lcn" ng-model="vm.query.logicalChannelNumber" placeholder="Logical Channel Number">
+          </div>  
+          <div class="form-group">
+            <label for="offset">Offset</label>
+            <input type="number" class="form-control" id="offset" ng-model="vm.query.offset" placeholder="Offset">
+          </div>  
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button ng-click="vm.query=null;vm.listChannels(null)" class="btn btn-warning">Reset query</button>
+      </form>
+      </div>
+    </div>
+    
+  </uib-accordion>
+
+  
+
+
+      
       <button ng-show="vm.rawData" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Show Raw JSON</button>
       <p></p>
       <div id="demo" class="collapse">
