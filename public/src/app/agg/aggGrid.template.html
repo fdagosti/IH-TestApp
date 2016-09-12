@@ -14,6 +14,14 @@
       <div class="list-group-item" ng-repeat="channel in vm.grid">
 
           <h4 class="list-group-item-heading">{{channel.name}}</h4>
+
+          <span class="pull-right">
+          <div class="btn-group-vertical">
+            <button class="btn btn-success" ng-disabled="!channel._links.playSession" ng-click="vm.nextCustomer(queue)">Tune To Channel</button>
+            <button class="btn btn-info" ng-disabled="true" ng-click="vm.nextCustomer(queue)">Set as Favorite</button>
+          </div>
+        </span>
+
           <h5 ><small>Logical Channel Number</small>&nbsp;{{channel.logicalChannelNumber}}  </h5>
           
           <p><small>ID</small> <strong>{{channel.id}}</strong></p>
