@@ -1,0 +1,151 @@
+<div class="container-fluid">
+  
+  <div class="page-header">
+    <h1>
+    Aggregated Grid
+    <small>{{vm.count}} channels out of {{vm.total}}</small></h1>
+  </div>
+
+  <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-7">
+    
+      <div class="list-group-item" ng-repeat="channel in vm.grid">
+
+          <h4 class="list-group-item-heading">{{channel.name}}</h4>
+          <h5 ><small>Logical Channel Number</small>&nbsp;{{channel.logicalChannelNumber}}  </h5>
+          
+          <p><small>ID</small> <strong>{{channel.id}}</strong></p>
+          <p><strong>playable?</strong> {{channel.isPlayable}} &nbsp;&nbsp;   <strong>Favourite?</strong> {{channel.isFavorite}}</p>
+
+
+          <uib-accordion>
+            <div uib-accordion-group class="panel-default"  is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+            <uib-accordion-heading>
+              Channel Schedule <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isCustomHeaderOpen, 'glyphicon-chevron-right': !status.isCustomHeaderOpen}"></i>
+            </uib-accordion-heading>
+            <div class="panel-body">
+              <uib-accordion >
+                <div ng-repeat="sched in channel.schedule" uib-accordion-group class="panel-default" heading="{{sched.content.title}}" >
+                    <div class="media">
+                      <div class="media-left">
+                        <img width="256" ng-repeat="i in sched.content.media" ng-src="{{i.uri}}">
+                      </div>
+                      <div class="media-body">
+                        <h4 class="media-heading">Synopsis</h4>
+                        <p>{{sched.content.synopsis.shortSynopsis}}</p>
+                        <p>
+                          <ul class="list-unstyled">
+                            <li><strong>Episode:</strong> {{sched.content.episodeTitle}}</li>
+                            <li><strong>Start Time: </strong>{{sched.startDateTime | date : "medium"}}</li>
+                            <li><strong>Duration :</strong> {{sched.duration/1000/60}} Minutes</li>
+                            <li><strong>ID:</strong> {{sched.id}}</li>
+                            <li><strong>Resource:</strong> {{sched.resource}}</li>
+                            <li><strong>Parental Rating:</strong> {{sched.content.parentalRating.value}} <small>({{sched.content.parentalRating.name}})</small></li>
+                            <li>
+                              <button type="button" ng-init="isCollapsed = true" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Locator</button>
+                              <div uib-collapse="isCollapsed">
+                                <div class="well well-lg">{{sched.content.locator}}</div>
+                              </div>
+                            </li>
+                          </ul>
+                        </p>
+                      </div>
+                    </div>
+                    
+                </div>
+              </uib-accordion>
+            </div>
+            </div>
+          </uib-accordion>
+
+      </div>
+      <div class="lead" ng-show="vm.category.categories.length ===0">No SubCategories found for the {{vm.category.name}} Category</div>
+    </div>
+    <div class="col-xs-12 col-sm-5">
+      <p class="lead">This screens display all the information from a dedicated category
+      </p>
+
+
+
+    <uib-accordion close-others="oneAtATime">
+    <div uib-accordion-group class="panel-default" heading="Advanced Query Options" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+      <div class="panel-body">
+        <form ng-submit="vm.getGrid(vm.query)">
+          <div class="form-group">
+              <label for="channelid">Channel ID</label>
+              <input type="text" class="form-control" id="channelid" ng-model="vm.query.channelId" placeholder="Channel ID">
+            </div>  
+          <div class="form-group">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox0" ng-model="vm.query.carousel" value="option1"> carousel
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox1" ng-model="vm.query.isAdult" value="option1"> isAdult
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox2" ng-model="vm.query.isEntitled" value="option2"> isEntitled
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox3" ng-model="vm.query.isPlayable" value="option3"> isPlayable
+          </label>
+         </div> 
+           <div class="form-group">
+            <label for="duration">Duration in seconds</label>
+            <input type="number" class="form-control" ng-model="vm.query.duration" id="duration" placeholder="Duration">
+          </div>  
+           <div class="form-group">
+            <label for="limit">Events Limit</label>
+            <input type="number" class="form-control" ng-model="vm.query.eventsLimit" id="duration" placeholder="Events Limit">
+          </div>  
+           <div class="form-group">
+            <label for="genreId">genre ID</label>
+            <input type="text" class="form-control" id="genreId" ng-model="vm.query.genreId" placeholder="Genre ID">
+          </div>  
+          <div class="form-group">
+            <label for="limit">Limit</label>
+            <input type="number" class="form-control" id="limit" ng-model="vm.query.limit" placeholder="Limit">
+          </div>  
+          <div class="form-group">  
+            <label for="locator">Locator</label>
+            <input type="text" class="form-control" id="locator" ng-model="vm.query.locator" placeholder="Locator">
+          </div>  
+          <div class="form-group">  
+            <label for="lcn">Logical Channel Number</label>
+            <input type="number" class="form-control" id="lcn" ng-model="vm.query.logicalChannelNumber" placeholder="Logical Channel Number">
+          </div>  
+          <div class="form-group">  
+            <label for="offset">Offset</label>
+            <input type="number" class="form-control" id="offset" ng-model="vm.query.offset" placeholder="Offset">
+          </div>  
+          <!-- <div class="form-group">  
+            <label for="sdt">Start Date Time</label>
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="vm.query.startDateTime" is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="popup1.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+            <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+          </div> -->  
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button ng-click="vm.query=null;vm.getGrid(null)" class="btn btn-warning">Reset query</button>
+      </form>
+      </div>
+    </div>
+    
+  </uib-accordion>
+      
+      <button ng-show="vm.rawData" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Show Raw JSON</button>
+      <p></p>
+      <div id="demo" class="collapse">
+        <pre>
+          {{vm.rawData | json}}
+        </pre>
+      </div>
+    </div>
+    
+
+  </div>
+</div>

@@ -20,6 +20,22 @@
                  controller: "channelsListCtrl",
                  controllerAs: "vm"
             })
+            .when("/categories", {
+                templateUrl: "src/app/categories/categories.template.html",
+                 controller: "categoriesListCtrl",
+                 controllerAs: "vm"
+            })
+            .when("/categories/:categoryId", {
+                templateUrl: "src/app/categories/category.template.html",
+                 controller: "categoryCtrl",
+                 controllerAs: "vm"
+            })
+            
+            .when("/agg/grid", {
+                templateUrl: "src/app/agg/aggGrid.template.html",
+                 controller: "aggGridCtrl",
+                 controllerAs: "vm"
+            })
             .when("/login", {
                 templateUrl: "src/app/auth/login.template.html",
                  controller: "loginCtrl",

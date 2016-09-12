@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  
+  <div class="page-header">
+    <h1>
+    Top Categories
+    <small>Top Categories</small></h1>
+  </div>
+
+  <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+    
+      <div class="list-group-item" ng-repeat="category in vm.categories">
+
+          <h4 class="list-group-item-heading">{{category.name}}</h4>
+
+          
+          <h5 ><small>Type</small>&nbsp;{{category.type}}  </h5>
+          
+          <p><small>ID</small> <strong>{{category.id}}</strong></p>
+          <p><strong>Adult?</strong> {{category.isAdult}} &nbsp;&nbsp;   <strong>Leaf?</strong> {{category.leaf}}</p>
+          links: 
+          <ul class="list-unstyled">
+            <li ng-repeat="(key, value) in category.links">
+              <a   ng-href="/#{{value.href}}">{{key}}</a>
+            </li>
+          </li>
+          </ul>
+  
+  
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <p class="lead">This screens display all the information that is provided by the "Categories" URL on IH
+      </p>
+
+      
+      <button ng-show="vm.rawData" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Show Raw JSON</button>
+      <p></p>
+      <div id="demo" class="collapse">
+        <pre>
+          {{vm.rawData | json}}
+        </pre>
+      </div>
+    </div>
+    
+
+  </div>
+</div>
