@@ -1,6 +1,6 @@
 ((function(){
 
-  angular.module('InfiniteEPG').controller('categoriesListCtrl', function($scope, categories) {
+  angular.module('InfiniteEPG').controller('categoriesListCtrl', function($scope, categories, settings) {
     var vm = this;
 
     vm.query = {};
@@ -19,6 +19,9 @@
     };
     vm.listCategories(null);
 
+    settings.subscribe($scope, "cats", function() {
+      vm.listCategories(vm.query);
+    });
     
   });
 

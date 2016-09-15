@@ -1,9 +1,12 @@
 ((function(){
 
-  angular.module('InfiniteEPG').controller('aggGridCtrl', function($scope, $routeParams, agg) {
+  angular.module('InfiniteEPG').controller('aggGridCtrl', function($scope, $routeParams, agg, settings) {
     var vm = this;
 
-    vm.query = {};
+    vm.query = {
+      eventsLimit: 5,
+      limit: 10
+    };
 
     vm.getGrid = function(query){
       vm.grid = null;
@@ -19,8 +22,11 @@
       });
       
     };
-    vm.getGrid(null);
+    vm.getGrid(vm.query);
 
+     settings.subscribe($scope, "grid", function() {
+      vm.getGrid(vm.query);
+    });
     
   });
 

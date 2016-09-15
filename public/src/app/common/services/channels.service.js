@@ -4,11 +4,11 @@
   .module('InfiniteEPG')
   .service('channels', channels);
 
-  channels.$inject = ["$http", "authentication"];   
-  function channels ($http, authentication) {
+  channels.$inject = ["$http", "authentication", "settings"];   
+  function channels ($http, authentication, settings) {
 
     var listChannels = function(query){
-      return $http.get("https://apx.cisco.com/spvss/infinitehome/infinitetoolkit/v_sandbox_1/channels",  {
+      return $http.get(settings.getCurrentSandbox().url + "channels",  {
         headers: {
           Authorization: "Bearer "+authentication.getAccessToken()
         },
