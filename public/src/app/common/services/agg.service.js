@@ -17,10 +17,19 @@
         });
     };
 
-    
+    var getContent = function(query){
+      
+      return $http.get(settings.getCurrentSandbox().url + "agg/content",  {
+        headers: {
+          Authorization: "Bearer "+authentication.getAccessToken()
+        },
+        params: query
+        });
+    };    
    
    return {
      getGrid : getGrid,
+     getContent : getContent,
    };
  }
 })();

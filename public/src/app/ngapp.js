@@ -30,10 +30,14 @@
                  controller: "categoryCtrl",
                  controllerAs: "vm"
             })
-            
             .when("/agg/grid", {
                 templateUrl: "src/app/agg/aggGrid.template.html",
                  controller: "aggGridCtrl",
+                 controllerAs: "vm"
+            })
+            .when("/agg/content", {
+                templateUrl: "src/app/agg/aggContent.template.html",
+                 controller: "aggContentCtrl",
                  controllerAs: "vm"
             })
             .when("/login", {
