@@ -1,0 +1,48 @@
+<div class="container  page-header" style="margin-top:60px;">
+
+  <div class="row well well-lg">
+    <div class="col-xs-12 col-sm-7">
+    <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+      <div class="embed-responsive embed-responsive-16by9">
+        <video autoplay="true" ng-src="{{vm.videoToPlay}}">
+          <p>Sadly, your browser does not support the playing of HLS Content. Try with Safari</p>
+        </video>
+      </div>
+       <div class="form-group">
+        <label for="exampleInputEmail1">Put here any video URL to play it</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Video URL" ng-model="vm.videosrc">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="vm.insertLinkIntoVideoTag()" ><span class="glyphicon glyphicon-play"/></button>
+          </span>
+        </div>
+      </div>
+      <ul class="list-unstyled">
+        <li><a ng-click="vm.insertLinkIntoVideoTag('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4')" href="">http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4</a></li>
+        <li><a ng-click="vm.insertLinkIntoVideoTag('http://techslides.com/demos/sample-videos/small.mp4')" href="">http://techslides.com/demos/sample-videos/small.mp4</a></li>
+        <li><a ng-click="vm.insertLinkIntoVideoTag('lasvegas-vod/lasvegas.m3u8')" href="">lasvegas-vod/lasvegas.m3u8</a></li>
+        <li><a ng-click="vm.insertLinkIntoVideoTag('http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8')" href="">http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8</a></li>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-5">
+    <div ng-show="vm.playSession" class="panel panel-default">
+      <div class="panel-heading">Play Session Details</div>
+      <div class="panel-body">
+        <ul class="list-unstyled">
+          <li><strong>ID:</strong> {{vm.playSession.id}}</li>
+          <li><strong>creation Date:</strong> {{vm.playSession.creationDate}}</li>
+          <li><strong>DRM:</strong> {{vm.playSession.drmType}}</li>
+          <li><strong>Kepp Alive Rate: </strong>{{vm.playSession.keepAliveRate}}</li>
+        </ul>  
+      </div>
+    </div>
+     <button ng-show="vm.playSession" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Show Raw JSON</button>
+      <p></p>
+      <div id="demo" class="collapse">
+        <pre>
+          {{vm.playSession | json}}
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>

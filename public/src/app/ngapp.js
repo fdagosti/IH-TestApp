@@ -1,6 +1,6 @@
 (function(){
 
-    angular.module("InfiniteEPG", ["ngRoute", "ui.bootstrap"])
+    angular.module("InfiniteEPG", ["ngRoute", "ngAnimate", "ui.bootstrap"])
     .factory("mySocket", function(socketFactory){
         return socketFactory();
     });
@@ -43,6 +43,11 @@
             .when("/login", {
                 templateUrl: "src/app/auth/login.template.html",
                  controller: "loginCtrl",
+                 controllerAs: "vm"
+            })
+            .when("/video/:locator", {
+                templateUrl: "src/app/video/video.template.html",
+                 controller: "videoCtrl",
                  controllerAs: "vm"
             })
             .otherwise({redirectTo: "/"});

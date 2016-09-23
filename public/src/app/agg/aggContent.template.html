@@ -2,7 +2,7 @@
   
   <div class="page-header">
     <h1>
-    Aggregated Grid
+    Aggregated Content
     <small>{{vm.count}} content out of {{vm.total}}</small></h1>
   </div>
 
@@ -35,26 +35,7 @@
             <li><strong>Resource:</strong> {{content.resource}}</li>
           </ul>
           <div class="btn-group-vertical">
-            <button class="btn btn-success" ng-click="vm.getPlaySession(content)">Watch video content</button>
-          </div>
-          <div ng-show="content.playSession" class="panel panel-default">
-            <div class="panel-heading">Play Session</div>
-            <div class="panel-body">
-            <ul class="list-unstyled">
-              <li><strong>ID:</strong> {{content.playSession.id}}</li>
-              <li><strong>creation Date:</strong> {{content.playSession.creationDate}}</li>
-              <li><strong>DRM:</strong> {{content.playSession.drmType}}</li>
-              <li><strong>Kepp Alive Rate: </strong>{{content.playSession.keepAliveRate}}</li>
-            </ul>
-            <div ng id="{{'player' + $index}}">HERE SHOULD BE DISPLAYED THE VIDEO</div>
-              <!-- <object type="application/x-shockwave-flash" id="player" data="/player/GrindPlayer.swf" width="640" height="480" style="visibility: visible;">
-              <param name="allowFullScreen" value="true">
-              <param name="allowScriptAccess" value="always">
-              <param name="wmode" value="opaque">
-              <param name="flashvars" value="autoPlay=true&amp;src=https%3A//www.dianshibo.com/fetch.php/content.spvsstmedmz.cisco.com/vod/d70f5bf1-2d3a-4745-acc9-3f9892640afd/d70f5bf1-2d3a-4745-acc9-3f9892640afd.m3u8%23.m3u8&amp;streamType=live&amp;scaleMode=letterbox&amp;plugin_hls=/player/grindplayer/flashlsOSMF.swf&amp;hls_debug=false&amp;hls_debug2=false&amp;hls_minbufferlength=-1&amp;hls_lowbufferlength=2&amp;hls_maxbufferlength=60&amp;hls_startfromlowestlevel=false&amp;hls_seekfromlowestlevel=false&amp;hls_live_flushurlcache=false&amp;hls_seekmode=ACCURATE&amp;hls_capleveltostage=false&amp;hls_maxlevelcappingmode=downscale">
-              <param name="flashvars" value="autoPlay=true&amp;src={{content.playSession.links.playUrl.href}}&amp;streamType=live&amp;scaleMode=letterbox&amp;plugin_hls=/player/HLSTestPlayer.swf&amp;hls_debug=false&amp;hls_debug2=false&amp;hls_minbufferlength=-1&amp;hls_lowbufferlength=2&amp;hls_maxbufferlength=60&amp;hls_startfromlowestlevel=false&amp;hls_seekfromlowestlevel=false&amp;hls_live_flushurlcache=false&amp;hls_seekmode=ACCURATE&amp;hls_capleveltostage=false&amp;hls_maxlevelcappingmode=downscale">
-              </object> -->
-            </div>
+            <button class="btn btn-success" ng-click="vm.playVideo(content)">Watch video content</button>
           </div>
         </div>
       </div>
