@@ -11,14 +11,13 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6">
     
-      <div class="list-group-item alert alert-info" ng-repeat="channel in vm.channels">
-
-          <span class="badge pull-left" ng-show="channel.isFavorite" >FAVORITE</span>
-          <h3 ><small>Channel Name</small>&nbsp;{{channel.name}}</h3>
-          <span class="pull-right" ng-repeat="media in channel.media" ><img ng-src="{{media.uri}}" alt="">&nbsp;&nbsp;</span>
-          <h3 ><small>Channel Number</small>&nbsp;{{channel.logicalChannelNumber}}  </h3>
-          
-          <p><small>Channel ID</small> <strong>{{channel.id}}</strong></p>
+      <div class="list-group-item list-group-item-default" ng-repeat="channel in vm.channels">
+                  <span class="badge pull-left" ng-show="channel.isFavorite" >FAVORITE</span>
+                  <h3 ><small>Channel Name</small>&nbsp;{{channel.name}}</h3>
+                  <span class="pull-right" ng-repeat="media in channel.media" ><img ng-src="{{media.uri}}" alt="">&nbsp;&nbsp;</span>
+                  <h3 ><small>Channel Number</small>&nbsp;{{channel.logicalChannelNumber}}  </h3>
+                  
+                  <p><small>Channel ID</small> <strong>{{channel.id}}</strong></p>
   
       </div>
       <p class="lead" ng-show="vm.tickets.length ===0">No channels...</p>

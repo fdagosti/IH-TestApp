@@ -12,12 +12,6 @@
     
       <ul class="nav navbar-nav navbar-right">  
         <li ng-hide="navvm.isLoggedIn"><a href="/#login/?page={{navvm.currentPath()}}" data-toggle="collapse" data-target=".navbar-collapse">Login</a></li>
-        <li class="dropdown">
-          <a href="" class="dropdown-toggle" data-toggle="dropdown">Sandbox: {{navvm.currentSandbox.name}}<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li ng-repeat="sandbox in navvm.sandboxes" ><a ng-click="navvm.selectSandbox(sandbox)" >{{sandbox.name}}</a></li>
-          </ul>
-        </li>
         <li ng-show="navvm.isLoggedIn" class="dropdown">
           <a href="" class="dropdown-toggle" data-toggle="dropdown">Client ID: {{navvm.currentUser.client_id}}<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -28,6 +22,12 @@
             <li ><a href="/#video" >Video</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="" ng-click="navvm.logout()" data-toggle="collapse" data-target=".navbar-collapse">Logout</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">Sandbox: {{navvm.currentSandbox.name}}<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="sandbox in navvm.sandboxes" ><a ng-click="navvm.selectSandbox(sandbox)" >{{sandbox.name}}</a></li>
           </ul>
         </li>
         <li><a href="/#/" data-toggle="collapse" data-target=".navbar-collapse">About</a></li>
