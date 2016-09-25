@@ -17,7 +17,9 @@ angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $sce, $ro
         vm.playSession = response.data;
         vm.insertLinkIntoVideoTag(vm.playSession.links.playUrl.href);        
       }, function(error){
-        vm.error = "Could not retrieve playSession from IH server. Consider to log out and log in again. "+ error.toString();
+        var errString = (error.status && error.statusText)?error.status+" "+error.statusText:error.toString;
+        vm.error = "Could not retrieve playSession from IH server. Consider to log out and log in again. "+ errString;
+        
       });
     };
 

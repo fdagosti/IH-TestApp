@@ -3,9 +3,15 @@
   angular.module('InfiniteEPG').controller('aggContentCtrl', function($window, $location, $scope, $routeParams, agg, settings) {
     var vm = this;
 
+    var catId = $location.search().categoryId;
+    if (catId && catId.endsWith('{')){
+      // this is to correct a bug the server seems to send about category links
+      catId = catId.substring(0, catId.length - 1);
+    }
+
     vm.query = {
-      
-      limit: 10
+      limit: 10,
+      categoryId: catId
     };
 
     vm.getContent = function(query){

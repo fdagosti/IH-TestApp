@@ -40,6 +40,11 @@
                  controller: "aggContentCtrl",
                  controllerAs: "vm"
             })
+            .when("/content", {
+                templateUrl: "src/app/agg/aggContent.template.html",
+                 controller: "aggContentCtrl",
+                 controllerAs: "vm"
+            })
             .when("/login", {
                 templateUrl: "src/app/auth/login.template.html",
                  controller: "loginCtrl",
