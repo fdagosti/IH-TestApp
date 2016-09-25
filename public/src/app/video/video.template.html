@@ -3,12 +3,12 @@
   <div class="row well well-lg">
     <div class="col-xs-12 col-sm-7">
     <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-    <div role="alert" ng-show="vm.hlsError" class="alert alert-danger">
-      Sorry, your browser does not support HLS content. If you're using chrome on Mac, consider using Safari instead<br> Url to Play: <a ng-href="{{vm.hlsError}}">{{vm.hlsError}}</a>
-    </div>
       <div class="embed-responsive embed-responsive-16by9">
         <video ng-hide="vm.playbackError" id="contentViewer" ng-model="vm.model" autoplay="true" ng-src="{{vm.videoToPlay}}" ng-error="vm.handleError(this)">
         </video>
+        <div role="alert" ng-show="vm.hlsError" class="alert alert-danger">
+          Sorry, your browser does not support HLS content. If you're using chrome on Mac, consider using Safari instead<br> Url to Play: <a ng-href="{{vm.hlsError}}">{{vm.hlsError}}</a>
+        </div>
         <div class="alert alert-warning" ng-show="vm.playbackError">{{vm.playbackError}}</div>
       </div>
       <!-- <div class="btn-group btn-group-justified" role="group">
