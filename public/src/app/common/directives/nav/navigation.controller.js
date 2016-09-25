@@ -24,10 +24,10 @@
         };
 
         var _getSandboxes = function(){
-            vm.currentSandbox = settings.getCurrentSandbox();
             settings.getSandboxes()
             .then(function(response){
                 vm.sandboxes = response.data;
+                vm.currentSandbox = settings.getCurrentSandbox();
             }, function(error){
                 console.log(error);
             })
