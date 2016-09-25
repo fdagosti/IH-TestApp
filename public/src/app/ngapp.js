@@ -1,6 +1,6 @@
 (function(){
 
-    angular.module("InfiniteEPG", ["ngRoute", "ngAnimate", "ui.bootstrap"])
+    angular.module("InfiniteEPG", ["ngRoute", "ngAnimate", "ui.bootstrap", "ngError"])
     .factory("mySocket", function(socketFactory){
         return socketFactory();
     });
