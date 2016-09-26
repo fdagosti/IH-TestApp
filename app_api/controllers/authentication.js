@@ -24,7 +24,7 @@ module.exports.login = function(req, res) {
         token.client_id = clientId;
         sendJSONresponse(res, 200, token);
     }).on("fail", function(error, response){
-        sendJSONresponse(res, response.statusCode, error.error_description);
+        sendJSONresponse(res, response.statusCode, error);
     });
 };
 

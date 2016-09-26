@@ -39,7 +39,7 @@
                     $location.search("page", null);
                     $location.path(vm.returnPage);
                 }, function(err) {
-                    vm.formError = err.data;
+                    vm.formError = err.data.error;
                 });
         };
     }
