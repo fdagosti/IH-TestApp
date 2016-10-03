@@ -4,7 +4,8 @@
     <div class="col-xs-12 col-sm-7">
     <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
       <div class="embed-responsive embed-responsive-16by9">
-        <video ng-hide="vm.playbackError" id="contentViewer" ng-model="vm.model" autoplay="true" ng-src="{{vm.videoToPlay}}" ng-error="vm.handleError(this)">
+        <video class="vjs-default-skin embed-responsive embed-responsive-16by9" preload="auto" id="contentViewer" autoplay="true">
+        
         </video>
         <div role="alert" ng-show="vm.hlsError" class="alert alert-danger">
           Sorry, your browser does not support HLS content. If you're using chrome on Mac, consider using Safari instead<br> Url to Play: <a ng-href="{{vm.hlsError}}">{{vm.hlsError}}</a>
@@ -21,24 +22,22 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Put here any video URL to play it</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Video URL" ng-model="vm.videosrc">
+              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Video URL" ng-model="vm.videosrc.src">
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="vm.insertLinkIntoVideoTag()"><span class="glyphicon glyphicon-play"/></button>
               </span>
             </div>
           </div>
           <ul class="list-unstyled">
-            <li><a ng-click="vm.insertLinkIntoVideoTag('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4')" href="">http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4</a></li>
-            <li><a ng-click="vm.insertLinkIntoVideoTag('http://techslides.com/demos/sample-videos/small.mp4')" href="">http://techslides.com/demos/sample-videos/small.mp4</a></li>
-            <li><a ng-click="vm.insertLinkIntoVideoTag('http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8')" href="">http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8</a></li>
+            <li><a ng-click="vm.insertLinkIntoVideoTag({ type: 'video/mp4', src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' })" href="">http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4</a></li>
+            <li><a ng-click="vm.insertLinkIntoVideoTag({ type: 'video/mp4', src: 'http://techslides.com/demos/sample-videos/small.mp4' })" href="">http://techslides.com/demos/sample-videos/small.mp4</a></li>
+            <li><a ng-click="vm.insertLinkIntoVideoTag({type:'application/x-mpegURL', src:'http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8'})" href="">http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8</a></li>
           </ul>
         </div>
       </uib-accordion>
     </div>
     <div class="col-xs-12 col-sm-5">
-    <p class="lead">Warning, the IH platform is currently providing HLS content that cannot be played in Desktop chrome.</p>
-    <p class="lead">If you are on a Mac, try with Safari instead</p>
-    <p class="lead">On mobile platform, everything should work fine</p>
+    <p class="lead">The IH Platform provide video content in HLS format. Support in Chrome is software based</p>
     <div ng-show="vm.playSession" class="panel panel-default">
       <div class="panel-heading">Play Session Details</div>
       <div class="panel-body">

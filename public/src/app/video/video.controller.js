@@ -1,21 +1,15 @@
 ((function(){
 
-angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $sce, $routeParams, devices) {
+angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, devices) {
    var vm = this;
     $scope.pageClass = 'video-page';
-    vm.video = document.getElementById("contentViewer");
-    var canPlayHLS = vm.video.canPlayType("application/vnd.apple.mpegURL");
-
-    vm.handleError = function(){
-      vm.playbackError = "Video Tag Error Code "+vm.video.error.code;
-      
-    };  
 
   vm.playLocator = function(locator){
     devices.getPlaySession(locator)
       .then(function(response){
         vm.playSession = response.data;
-        vm.insertLinkIntoVideoTag(vm.playSession.links.playUrl.href);        
+        var videoToPlay = {"type":"application/x-mpegURL", "src":vm.playSession.links.playUrl.href};
+        vm.insertLinkIntoVideoTag(videoToPlay);        
       }, function(error){
         var errString = (error.status && error.statusText)?error.status+" "+error.statusText:error.toString;
         vm.error = "Could not retrieve playSession from IH server. Consider to log out and log in again. "+ errString;
@@ -26,16 +20,18 @@ angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $sce, $ro
 
 
   vm.insertLinkIntoVideoTag = function(src){
-    if (!src){src = vm.videosrc;}
-    if (src.endsWith("m3u8") && !canPlayHLS){
-      vm.hlsError = src;
-    }else{
-      vm.hlsError = "";
+    if (!src){
+      if (vm.videosrc.src.endsWith("m3u8")){
+        src = {"type":"application/x-mpegURL", "src":vm.videosrc.src};
+      }else{
+        src = {"type":"video/mp4", "src":vm.videosrc.src};
+      }
     }
-    var t = $sce.trustAsResourceUrl(src);
-    delete vm.playbackError;
-    vm.videoToPlay = t;
-    vm.videosrc = t;
+    var player = videojs('contentViewer');
+    player.src(src);
+    player.play();
+    vm.videosrc = src;
+
   };
 
   var locator = $routeParams.locator;
