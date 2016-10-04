@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h3 class="modal-title">Check your parental Pin code</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12">
+            <form ng-submit="vm.checkPin(vm.pin)">
+                <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+                <span ng-class="vm.pinStatus.isBlocked?'text-danger':'text-success'">{{vm.pinStatus.isBlocked?"Pin is Blocked":"Pin is not Blocked"}}</span> <span class="pull-right">Number of retries: {{vm.pinStatus.retriesLeft}}</span>
+                
+                <div class="form-group">
+                    <input ng-disabled="vm.pinStatus.isBlocked" type="password" class="form-control" id="secret" placeholder="Enter your parental pin code" ng-model="vm.pin">
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button ng-hide="vm.pinStatus.isBlocked" class="btn btn-default" type="button" ng-click="vm.checkPin(vm.pin)">Check pin</button>
+    <button ng-hide="vm.pinStatus.isBlocked" class="btn btn-primary" type="button" ng-click="vm.cancel()">Cancel</button>
+    <button ng-show="vm.pinStatus.isBlocked" class="btn btn-primary" type="button" ng-click="vm.cancel()">Close</button>
+</div>

@@ -26,7 +26,7 @@
         <li ng-hide="navvm.isLoggedIn"><a href="/#login/?page={{navvm.currentPath()}}" data-toggle="collapse" data-target=".navbar-collapse">Login</a></li>
         <li ng-show="navvm.isLoggedIn" class="dropdown">
           <a href="" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="glyphicon glyphicon-user"></i> <small>({{navvm.getTokenLeftTime()}} left)</small>  <span class="caret"></span>
+            <i class="glyphicon glyphicon-user" ng-class="navvm.pinChecked?'text-success':'text-danger'"></i> <small>({{navvm.getTokenLeftTime()}} left)</small>  <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
            <li class="dropdown-header">{{navvm.currentUser.client_id}}</li>
@@ -34,6 +34,7 @@
             <li ><a href="/#categories" >Categories Screen</a></li>
             <li ><a href="/#agg/grid" >Grid Screen</a></li>
             <li ><a href="/#agg/content" >Content Screen</a></li>
+            <li ><a ng-click="navvm.showPin()" href="" ><span ng-class="navvm.pinChecked?'text-success':'text-danger'">Check your Pin</span></a></li>
             <li role="separator" class="divider"></li>
             <li><a href="" ng-click="navvm.logout()" data-toggle="collapse" data-target=".navbar-collapse">Logout</a></li>
           </ul>

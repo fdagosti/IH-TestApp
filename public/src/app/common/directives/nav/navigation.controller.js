@@ -3,8 +3,8 @@
     .module("InfiniteEPG")
     .controller("navigationCtrl", navigationCtrl);
 
-    navigationCtrl.$inject = ["$scope", "$location", "authentication", "settings", "suggest"];
-    function navigationCtrl($scope, $location, authentication, settings, suggest){
+    navigationCtrl.$inject = ["$scope", "$location", "authentication", "settings", "suggest", "pins"];
+    function navigationCtrl($scope, $location, authentication, settings, suggest, pins){
         var vm = this;
 
         var _updateUser = function(){
@@ -45,14 +45,20 @@
         };
 
         vm.getSuggestions = function(keywords){
-            console.log("getSuggestions ",keywords);
             return suggest.getSuggestions(keywords)
             .then(function(response){
-            console.log("response from keywords", response.data);
             return response.data.suggestions;
       }, function(error){
         console.error("search did not work");
       });
+        };
+
+        vm.showPin = function(){
+            vm.pinChecked = false;
+            pins.getModalPin().result
+            .then(function(pinOk) {
+                vm.pinChecked = pinOk;
+            });
         };
 
         vm.goToSearchTerm = function(item, model, label, event){
@@ -82,7 +88,7 @@
                 vm.sandboxes = response.data;
                 vm.currentSandbox = settings.getCurrentSandbox();
             }, function(error){
-                console.log(error);
+                console.error(error);
             })
         };
 
