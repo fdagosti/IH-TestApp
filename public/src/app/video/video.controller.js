@@ -1,6 +1,6 @@
 ((function(){
 
-angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, devices) {
+angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, devices, settings) {
    var vm = this;
     $scope.pageClass = 'video-page';
 
@@ -8,7 +8,7 @@ angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routePar
     devices.getPlaySession(locator)
       .then(function(response){
         vm.playSession = response.data;
-        var videoToPlay = {"type":"application/x-mpegURL", "src":vm.playSession.links.playUrl.href};
+        var videoToPlay = {"type":"application/x-mpegURL", "src":settings.getProxy()+vm.playSession.links.playUrl.href};
         vm.insertLinkIntoVideoTag(videoToPlay);        
       }, function(error){
         var errString = (error.status && error.statusText)?error.status+" "+error.statusText:error.toString;

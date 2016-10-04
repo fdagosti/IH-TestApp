@@ -44,8 +44,12 @@
       }
    };
 
+   var getProxy = function(){
+    return "https://cisco-itk-proxy.herokuapp.com/";
+   }
+
    var setCurrentSandbox = function(sandbox){
-    if (sandbox.proxy){sandbox.url = "https://cisco-itk-proxy.herokuapp.com/"+sandbox.url}
+    if (sandbox.proxy){sandbox.url = getProxy()+sandbox.url}
     _currentSandbox = sandbox;
     _saveSettings();
     notify();
@@ -79,7 +83,7 @@
      getCurrentSandbox : getCurrentSandbox,
      setCurrentSandbox : setCurrentSandbox,
      getSandboxHeaders : getSandboxHeaders,
-     getSandboxHeaders : getSandboxHeaders,
+     getProxy : getProxy,
    };
  }
 })();
