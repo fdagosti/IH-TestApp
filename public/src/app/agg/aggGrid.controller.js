@@ -11,6 +11,7 @@
     vm.getGrid = function(query){
       vm.grid = null;
       vm.rawData = null;
+      vm.error = null;
       agg.getGrid(query)
       .then(function(response){
         vm.count = response.data.count;

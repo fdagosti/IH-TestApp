@@ -8,6 +8,7 @@
     vm.listChannels = function(query){
       vm.channels = null;
       vm.rawData = null;
+      vm.error = null;
       channels.listChannels(query)
       .then(function(response){
         vm.count = response.data.count;

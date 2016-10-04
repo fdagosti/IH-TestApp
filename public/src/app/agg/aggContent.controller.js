@@ -17,6 +17,7 @@
     vm.getContent = function(query){
       vm.content = null;
       vm.rawData = null;
+      vm.error = null;
       agg.getContent(query)
       .then(function(response){
         vm.count = response.data.count;

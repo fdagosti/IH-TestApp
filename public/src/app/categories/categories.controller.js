@@ -8,6 +8,7 @@
     vm.listCategories = function(query){
       vm.categories = null;
       vm.rawData = null;
+      vm.error = null;
       categories.listCategories(query)
       .then(function(response){
         vm.categories = response.data.categories;
