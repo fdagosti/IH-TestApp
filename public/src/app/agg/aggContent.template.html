@@ -14,7 +14,7 @@
       <div class="list-group-item" ng-repeat="content in vm.content">
         <div class="media">
           <div class="media-left">
-            <img width="256" ng-repeat="i in content.content.media" ng-src="{{i.uri}}">
+            <img width="256" ng-repeat="i in content.content.media" ng-src="{{i.uri?i.uri:i.url}}">
           </div>
           <div class="media-body">
 

@@ -38,7 +38,7 @@
                 <div ng-repeat="sched in channel.schedule" uib-accordion-group class="panel-default" heading="{{sched.content.title}}" >
                     <div class="media">
                       <div class="media-left">
-                        <img width="256" ng-repeat="i in sched.content.media" ng-src="{{i.uri}}">
+                        <img width="256" ng-repeat="i in sched.content.media" ng-src="{{i.uri?i.uri:i.url}}">
                       </div>
                       <div class="media-body">
                         <h4 class="media-heading">Synopsis</h4>

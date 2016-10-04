@@ -14,7 +14,7 @@
       <div class="list-group-item list-group-item-default" ng-repeat="channel in vm.channels">
                   <span class="badge pull-left" ng-show="channel.isFavorite" >FAVORITE</span>
                   <h3 ><small>Channel Name</small>&nbsp;{{channel.name}}</h3>
-                  <span class="pull-right" ng-repeat="media in channel.media" ><img ng-src="{{media.uri}}" alt="">&nbsp;&nbsp;</span>
+                  <span class="pull-right" ng-repeat="media in channel.media" ><img ng-src="{{media.uri?media.uri:media.url}}" alt="">&nbsp;&nbsp;</span>
                   <h3 ><small>Channel Number</small>&nbsp;{{channel.logicalChannelNumber}}  </h3>
                   
                   <p><small>Channel ID</small> <strong>{{channel.id}}</strong></p>
