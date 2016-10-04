@@ -10,9 +10,7 @@
     var getGrid = function(query){
       
       return $http.get(settings.getCurrentSandbox().url + "agg/grid",  {
-        headers: {
-          Authorization: "Bearer "+authentication.getAccessToken()
-        },
+        headers: settings.getSandboxHeaders(),
         params: query
         });
     };
@@ -20,9 +18,7 @@
     var getContent = function(query){
       
       return $http.get(settings.getCurrentSandbox().url + "agg/content",  {
-        headers: {
-          Authorization: "Bearer "+authentication.getAccessToken()
-        },
+        headers: settings.getSandboxHeaders(),
         params: query
         });
     };    

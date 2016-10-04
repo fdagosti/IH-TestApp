@@ -9,17 +9,13 @@
 
     var listCategories = function(){
       return $http.get(settings.getCurrentSandbox().url + "categories",  {
-        headers: {
-          Authorization: "Bearer "+authentication.getAccessToken()
-        },
+        headers: settings.getSandboxHeaders(),
         });
     };
 
     var getCategory = function(categoryId){
       return $http.get(settings.getCurrentSandbox().url + "categories/"+categoryId,  {
-        headers: {
-          Authorization: "Bearer "+authentication.getAccessToken()
-        },
+        headers: settings.getSandboxHeaders(),
         });
     };
 

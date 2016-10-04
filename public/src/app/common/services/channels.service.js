@@ -4,14 +4,15 @@
   .module('InfiniteEPG')
   .service('channels', channels);
 
-  channels.$inject = ["$http", "authentication", "settings"];   
-  function channels ($http, authentication, settings) {
+  channels.$inject = ["$http", "settings"];   
+  function channels ($http, settings) {
+
+    var headers =settings.getSandboxHeaders();
+    console.log("headers ",headers); 
 
     var listChannels = function(query){
       return $http.get(settings.getCurrentSandbox().url + "channels",  {
-        headers: {
-          Authorization: "Bearer "+authentication.getAccessToken()
-        },
+        headers: settings.getSandboxHeaders(),
         params: query
         });
     };

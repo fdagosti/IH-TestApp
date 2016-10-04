@@ -10,9 +10,7 @@
     var getPlaySession = function(instanceID){
       
       return $http.post(settings.getCurrentSandbox().url + "devices/me/playsessions",  "",{
-        headers: {
-          Authorization: "Bearer "+authentication.getAccessToken()
-        },
+        headers: settings.getSandboxHeaders(),
         params: {instanceId: instanceID}
         });
     };

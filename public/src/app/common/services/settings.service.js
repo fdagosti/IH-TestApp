@@ -4,8 +4,8 @@
   .module('InfiniteEPG')
   .service('settings', settings);
 
-  settings.$inject = ["$window", "$http", "$rootScope"];   
-  function settings ($window, $http, $rootScope) {
+  settings.$inject = ["$window", "$http", "$rootScope", "authentication"];   
+  function settings ($window, $http, $rootScope, authentication) {
 
     var _saveSettings = function() {
             $window.localStorage["InfiniteEPG-settings"] = JSON.stringify(_currentSandbox);
@@ -29,7 +29,23 @@
       }
    };
 
+   var getSandboxURL = function(){
+
+   };
+
+   var getSandboxHeaders = function(){
+      var sandbox = getCurrentSandbox();
+      if (sandbox.headers){
+        return sandbox.headers;
+      }else{
+        return {
+          Authorization: "Bearer "+authentication.getAccessToken()
+        }
+      }
+   };
+
    var setCurrentSandbox = function(sandbox){
+    if (sandbox.proxy){sandbox.url = "https://cisco-itk-proxy.herokuapp.com/"+sandbox.url}
     _currentSandbox = sandbox;
     _saveSettings();
     notify();
@@ -62,6 +78,8 @@
      getSandboxes : getSandboxes,
      getCurrentSandbox : getCurrentSandbox,
      setCurrentSandbox : setCurrentSandbox,
+     getSandboxHeaders : getSandboxHeaders,
+     getSandboxHeaders : getSandboxHeaders,
    };
  }
 })();
