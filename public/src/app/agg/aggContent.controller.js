@@ -9,10 +9,20 @@
       catId = catId.substring(0, catId.length - 1);
     }
 
-    vm.query = {
-      limit: 10,
-      categoryId: catId
-    };
+    var assetName = $location.search().name;
+
+    if (assetName){
+      vm.query = {
+        q: assetName,
+      };
+    }else {
+      vm.query = {
+        limit: 10,
+        categoryId: catId
+      };
+      
+    }
+
 
     vm.getContent = function(query){
       vm.content = null;

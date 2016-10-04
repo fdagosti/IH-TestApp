@@ -16,8 +16,11 @@
     };
 
     var getContent = function(query){
+
+      // is this really useful ????
+      var endPoint = query.name ? "content":"agg/content";
       
-      return $http.get(settings.getCurrentSandbox().url + "agg/content",  {
+      return $http.get(settings.getCurrentSandbox().url + endPoint,  {
         headers: settings.getSandboxHeaders(),
         params: query
         });

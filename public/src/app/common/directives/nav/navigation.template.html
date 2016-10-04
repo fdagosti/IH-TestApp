@@ -10,11 +10,26 @@
     </div>
     <div id="navbar-main" class="collapse navbar-collapse">
     
+      <form ng-show="navvm.isLoggedIn" class="navbar-form navbar-right">
+        <div class="form-group has-feedback">
+          <input style="width: 300px" type="text" class="form-control form-control" placeholder="search for video content" ng-model="navvm.searchTerm" uib-typeahead="suggestion.name for suggestion in navvm.getSuggestions($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-on-select="navvm.goToSearchTerm($item, $model, $label, $event)"/>
+          <i ng-hide="loadingLocations" class="glyphicon glyphicon-search form-control-feedback"></i>
+          <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh form-control-feedback"></i>
+        </div>
+        <div ng-show="noResults" class="text-warning">
+          <i class="glyphicon glyphicon-remove"></i> No Results Found
+        </div>
+          
+        
+      </form>
       <ul class="nav navbar-nav navbar-right">  
         <li ng-hide="navvm.isLoggedIn"><a href="/#login/?page={{navvm.currentPath()}}" data-toggle="collapse" data-target=".navbar-collapse">Login</a></li>
         <li ng-show="navvm.isLoggedIn" class="dropdown">
-          <a href="" class="dropdown-toggle" data-toggle="dropdown">Client ID: {{navvm.currentUser.client_id}}<span class="caret"></span></a>
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="glyphicon glyphicon-user"></i> <small>({{navvm.getTokenLeftTime()}} left)</small>  <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu" role="menu">
+           <li class="dropdown-header">{{navvm.currentUser.client_id}}</li>
             <li ><a href="/#channels" >Channels Screen</a></li>
             <li ><a href="/#categories" >Categories Screen</a></li>
             <li ><a href="/#agg/grid" >Grid Screen</a></li>
@@ -24,12 +39,12 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="" class="dropdown-toggle" data-toggle="dropdown">Sandbox: {{navvm.currentSandbox.name}} {{navvm.currentSandbox.proxy?"(CORS)":""}}<span class="caret"></span></a>
+          <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-globe"></i> {{navvm.currentSandbox.name}} <small><em>{{navvm.currentSandbox.proxy?"(CORS)":""}}</em></small> <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li ng-repeat="sandbox in navvm.sandboxes" ><a ng-click="navvm.selectSandbox(sandbox)" >{{sandbox.name}} {{sandbox.proxy?"(CORS)":""}}</a></li>
+             <li class="dropdown-header">Available Sandboxes</li>
+            <li ng-repeat="sandbox in navvm.sandboxes" ><a ng-click="navvm.selectSandbox(sandbox)" >{{sandbox.name}} <small><em>{{sandbox.proxy?"(CORS)":""}}</em></small></a></li>
           </ul>
         </li>
-        <li><a href="/#/" data-toggle="collapse" data-target=".navbar-collapse">About</a></li>
       </ul>
       
     </div>
