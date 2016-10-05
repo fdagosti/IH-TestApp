@@ -1,6 +1,6 @@
 ((function(){
 
-  angular.module('InfiniteEPG').controller('aggContentCtrl', function($window, $location, $scope, $routeParams, agg, settings) {
+  angular.module('InfiniteEPG').controller('aggContentCtrl', function($window, $location, $scope, $routeParams, agg, settings, pins) {
     var vm = this;
 
     var catId = $location.search().categoryId;
@@ -46,7 +46,12 @@
     });
 
     vm.playVideo = function(content){
-      $location.path("/video/"+content.id);
+      pins.getModalPin().result
+      .then(function(pinOk) {
+          if (pinOk){
+            $location.path("/video/"+content.id);
+          }
+      });
     };
     
   });
