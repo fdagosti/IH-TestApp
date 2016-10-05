@@ -30,7 +30,7 @@
    <uib-accordion close-others="oneAtATime">
     <div uib-accordion-group class="panel-default" heading="Advanced Query Options" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
       <div class="panel-body">
-        <form ng-submit="vm.listChannels(vm.query)">
+        <form ng-submit="vm.listChannels(true)">
           <div class="form-group">
               <label for="channelid">Channel ID</label>
               <input type="text" class="form-control" id="channelid" ng-model="vm.query.channelId" placeholder="Channel ID">

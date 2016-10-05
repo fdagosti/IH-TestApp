@@ -3,14 +3,14 @@
   <div class="page-header">
     <h1>
     Aggregated Grid
-    <small>{{vm.count}} channels out of {{vm.total}}</small></h1>
+    <small>{{vm.grid.length}} channels out of {{vm.total}}</small></h1>
   </div>
 
   <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-7">
-    
+    <div id="gridscroll"  style="overflow-y: scroll;height: 100vh;" class="col-xs-12 col-sm-7">
+    <div infinite-scroll='vm.getGrid()' infinite-scroll-area="gridscroll" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
       <div class="list-group-item" ng-repeat="channel in vm.grid">
 
           <h4 class="list-group-item-heading">{{channel.name}}</h4>
@@ -69,6 +69,7 @@
           </uib-accordion>
 
       </div>
+      </div>
       <div class="lead" ng-show="vm.category.categories.length ===0">No SubCategories found for the {{vm.category.name}} Category</div>
     </div>
     <div class="col-xs-12 col-sm-5">
@@ -80,7 +81,7 @@
     <uib-accordion close-others="oneAtATime">
     <div uib-accordion-group class="panel-default" heading="Advanced Query Options" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
       <div class="panel-body">
-        <form ng-submit="vm.getGrid(vm.query)">
+        <form ng-submit="vm.getGrid(true)">
           <div class="form-group">
               <label for="channelid">Channel ID</label>
               <input type="text" class="form-control" id="channelid" ng-model="vm.query.channelId" placeholder="Channel ID">

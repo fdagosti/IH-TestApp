@@ -7,13 +7,19 @@
     vm.channels = [];
     var currentOffset = 0;
 
-    vm.listChannels = function(){
-      if (vm.channels.length >= vm.total){return;}
+    vm.listChannels = function(reset){
+        if (reset){
+        vm.channels = [];
+        currentOffset = 0;
+        vm.total = 0;
+      }else {
+        if (vm.channels.length >= vm.total){return;}
+      }
       vm.rawData = null;
       vm.error = null;
       vm.busy = true;
       vm.query.offset = currentOffset;
-      vm.query.limit = vm.total?Math.min(20, vm.total - currentOffset):20;
+      vm.query.limit = vm.total?Math.min(vm.query.limit, vm.total - currentOffset):vm.query.limit;
       channels.listChannels(vm.query)
       .then(function(response){
         var queryContent = response.data.channels;
@@ -31,10 +37,9 @@
       });
       
     };
-    // vm.listChannels();
 
     settings.subscribe($scope, "channels", function() {
-      vm.listChannels(vm.query);
+      vm.listChannels(true);
     });
     
   });

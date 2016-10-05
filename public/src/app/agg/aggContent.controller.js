@@ -27,12 +27,20 @@
 
     vm.content = [];
 
-    vm.getContent = function(){
-      console.log("GET Content ",vm.query);
+    vm.getContent = function(reset){
+      if (reset){
+        vm.content = [];
+        currentOffset = 0;
+        vm.total = 0;
+      }else {
+        if (vm.content.length >= vm.total){return;}
+      }
+
       vm.rawData = null;
       vm.error = null;
       vm.busy = true;
       vm.query.offset = currentOffset;
+      vm.query.limit = vm.total?Math.min(vm.query.limit, vm.total - currentOffset):vm.query.limit;
       agg.getContent(vm.query)
       .then(function(response){
         var queryContent = response.data.content;
@@ -51,11 +59,9 @@
       });
       
     };
-    // vm.getContent();
 
     settings.subscribe($scope, "content", function() {
-      vm.content = [];
-      vm.getContent();
+      vm.getContent(true);
     });
 
     vm.playVideo = function(content){
