@@ -46,12 +46,8 @@
     });
 
     vm.playVideo = function(content){
-      pins.getModalPin().result
-      .then(function(pinOk) {
-          if (pinOk){
-            $location.path("/video/"+content.id);
-          }
-      });
+      $location.path("/video/"+content.id);
+      
     };
     
   });
