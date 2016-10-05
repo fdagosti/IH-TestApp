@@ -9,7 +9,7 @@
   <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
 
   <div class="row">
-    <div id="gridscroll"  style="overflow-y: scroll;height: 100vh;" class="col-xs-12 col-sm-7">
+    <div id="gridscroll"  style="overflow-y: scroll;height: 75vh;" class="col-xs-12 col-sm-7">
     <div infinite-scroll='vm.getGrid()' infinite-scroll-area="gridscroll" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
       <div class="list-group-item" ng-repeat="channel in vm.grid">
 
