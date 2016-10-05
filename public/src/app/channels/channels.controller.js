@@ -6,6 +6,7 @@
     vm.query = {};
     vm.channels = [];
     var currentOffset = 0;
+    vm.query.limit = 10;
 
     vm.listChannels = function(reset){
         if (reset){
