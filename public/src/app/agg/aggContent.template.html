@@ -9,10 +9,9 @@
   <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
 
   <div class="row">
-    <div id="titou" style="overflow-y: scroll;height: 75vh;" class="col-xs-12 col-sm-7">
     
-
-      <div infinite-scroll='vm.getContent()' infinite-scroll-area="titou" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
+    <div id="titou" style="overflow-y: scroll;height: 75vh;" class="col-xs-12 col-sm-7">
+      <div infinite-scroll='vm.getContent()' infinite-scroll-area="titou" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
         <div class="list-group-item" ng-repeat="content in vm.content">
           <div class="media">
             <div class="media-left">
@@ -42,7 +41,6 @@
             </div>
           </div>
         </div>
-        <div ng-show='vm.busy'>Loading data...</div>
       </div>
       <div class="lead" ng-show="vm.category.categories.length ===0">No SubCategories found for the {{vm.category.name}} Category</div>
     </div>
@@ -126,6 +124,11 @@
         <pre>
           {{vm.rawData | json}}
         </pre>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+      <div ng-show="vm.busy" class="alert alert-info">Loading content from {{vm.query.offset}} to {{vm.query.offset+vm.query.limit}}...</div>
+    </div>
       </div>
     </div>
     

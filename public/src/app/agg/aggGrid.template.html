@@ -9,8 +9,10 @@
   <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
 
   <div class="row">
+
+  
     <div id="gridscroll"  style="overflow-y: scroll;height: 75vh;" class="col-xs-12 col-sm-7">
-    <div infinite-scroll='vm.getGrid()' infinite-scroll-area="gridscroll" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
+    <div infinite-scroll='vm.getGrid()' infinite-scroll-area="gridscroll" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
       <div class="list-group-item" ng-repeat="channel in vm.grid">
 
           <h4 class="list-group-item-heading">{{channel.name}}</h4>
@@ -28,7 +30,7 @@
           <p><strong>playable?</strong> {{channel.isPlayable}} &nbsp;&nbsp;   <strong>Favourite?</strong> {{channel.isFavorite}}</p>
 
 
-          <uib-accordion>
+          <uib-accordion ng-show="channel.schedule.length > 0">
             <div uib-accordion-group class="panel-default"  is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
             <uib-accordion-heading>
               Channel Schedule <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isCustomHeaderOpen, 'glyphicon-chevron-right': !status.isCustomHeaderOpen}"></i>
@@ -152,6 +154,11 @@
         <pre>
           {{vm.rawData | json}}
         </pre>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+      <div ng-show="vm.busy" class="alert alert-info">Loading Grid channels from {{vm.query.offset}} to {{vm.query.offset+vm.query.limit}}...</div>
+    </div>
       </div>
     </div>
     

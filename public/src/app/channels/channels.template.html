@@ -7,8 +7,10 @@
   </div>
 
   <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-
+  
+  
   <div class="row">
+  
     <div id="channelscroll"  style="overflow-y: scroll;height: 75vh;" class="col-xs-12 col-sm-6">
     <div infinite-scroll='vm.listChannels()' infinite-scroll-area="channelscroll" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
       <div class="list-group-item list-group-item-default" ng-repeat="channel in vm.channels">
@@ -77,6 +79,11 @@
           {{vm.rawData | json}}
         </pre>
       </div>
+      <div class="row">
+    <div class="col-xs-12">
+      <div ng-show="vm.busy" class="alert alert-info">Loading channels from {{vm.query.offset}} to {{vm.query.offset+vm.query.limit}}...</div>
+    </div>
+  </div>
     </div>
     
 
