@@ -3,52 +3,53 @@
   <div class="page-header">
     <h1>
     Aggregated Content
-    <small>{{vm.count}} content out of {{vm.total}}</small></h1>
+    <small>{{vm.content.length}} content out of {{vm.total}}</small></h1>
   </div>
 
   <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-7">
+    <div id="titou" style="overflow-y: scroll;height: 100vh;" class="col-xs-12 col-sm-7">
     
-      <div class="list-group-item" ng-repeat="content in vm.content">
-        <div class="media">
-          <div class="media-left">
-            <img width="256" ng-repeat="i in content.content.media" ng-src="{{i.uri?i.uri:i.url}}">
-          </div>
-          <div class="media-body">
 
-            <h4 class="media-heading">{{content.content.title}}</h4>
-          
-          <p><small>Production year</small>&nbsp;<strong>{{content.content.productionYear}}</strong>  </p>
-          
-          <ul class="list-unstyled">
-            <li><strong>short synopsis:</strong> {{content.content.synopsis.shortSynopsis}}</li>
-            <li><strong>ID:</strong> {{content.id}}</li>
-            <li><strong>type:</strong> {{content.type}}</li>
-            <li><strong>type:</strong> {{content.content.type}}</li>
-            <li><strong>Playable?: </strong>{{content.isPlayable}}</li>
-            <li><strong>entitled?: </strong>{{content.isEntitled}}</li>
-            <li><strong>Audio Format: </strong>{{content.content.audioFormat}}</li>
-            <li><strong>Duration :</strong> {{content.duration/1000/60}} Minutes</li>
-            <li><strong>Resource:</strong> {{content.content.resource}}</li>
-            <li><strong>Resource:</strong> {{content.resource}}</li>
-          </ul>
-          <div class="btn-group-vertical">
-            <button class="btn btn-success" ng-click="vm.playVideo(content)">Watch video content</button>
+      <div infinite-scroll='vm.getContent()' infinite-scroll-area="titou" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
+        <div class="list-group-item" ng-repeat="content in vm.content">
+          <div class="media">
+            <div class="media-left">
+              <img width="256" ng-repeat="i in content.content.media" ng-src="{{i.uri?i.uri:i.url}}">
+            </div>
+            <div class="media-body">
+
+              <h4 class="media-heading">{{content.content.title}}</h4>
+            
+              <p><small>Production year</small>&nbsp;<strong>{{content.content.productionYear}}</strong>  </p>
+              
+              <ul class="list-unstyled">
+                <li><strong>short synopsis:</strong> {{content.content.synopsis.shortSynopsis}}</li>
+                <li><strong>ID:</strong> {{content.id}}</li>
+                <li><strong>type:</strong> {{content.type}}</li>
+                <li><strong>type:</strong> {{content.content.type}}</li>
+                <li><strong>Playable?: </strong>{{content.isPlayable}}</li>
+                <li><strong>entitled?: </strong>{{content.isEntitled}}</li>
+                <li><strong>Audio Format: </strong>{{content.content.audioFormat}}</li>
+                <li><strong>Duration :</strong> {{content.duration/1000/60}} Minutes</li>
+                <li><strong>Resource:</strong> {{content.content.resource}}</li>
+                <li><strong>Resource:</strong> {{content.resource}}</li>
+              </ul>
+              <div class="btn-group-vertical">
+                <button class="btn btn-success" ng-click="vm.playVideo(content)">Watch video content</button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-        
-
+        <div ng-show='vm.busy'>Loading data...</div>
       </div>
       <div class="lead" ng-show="vm.category.categories.length ===0">No SubCategories found for the {{vm.category.name}} Category</div>
     </div>
     <div class="col-xs-12 col-sm-5">
       <p class="lead">This screens display all the information from a dedicated category
       </p>
-
+    
 
 
     <uib-accordion close-others="oneAtATime">

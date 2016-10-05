@@ -10,6 +10,7 @@
     }
 
     var assetName = $location.search().name;
+    var currentOffset = 0;
 
     if (assetName){
       vm.query = {
@@ -18,31 +19,43 @@
     }else {
       vm.query = {
         limit: 10,
+        offset: currentOffset,
         categoryId: catId
       };
       
     }
 
+    vm.content = [];
 
-    vm.getContent = function(query){
-      vm.content = null;
+    vm.getContent = function(){
+      console.log("GET Content ",vm.query);
       vm.rawData = null;
       vm.error = null;
-      agg.getContent(query)
+      vm.busy = true;
+      vm.query.offset = currentOffset;
+      agg.getContent(vm.query)
       .then(function(response){
+        var queryContent = response.data.content;
         vm.count = response.data.count;
         vm.total = response.data.total;
-        vm.content = response.data.content;
+        for (var i = 0; i < queryContent.length; i++) {
+          vm.content.push(queryContent[i]);
+        }
+        
         vm.rawData = response.data;
+        currentOffset = vm.content.length;
+        vm.busy = false;
       }, function(error){
+        vm.busy = false;
         vm.error = error.data;
       });
       
     };
-    vm.getContent(vm.query);
+    // vm.getContent();
 
     settings.subscribe($scope, "content", function() {
-      vm.getContent(vm.query);
+      vm.content = [];
+      vm.getContent();
     });
 
     vm.playVideo = function(content){

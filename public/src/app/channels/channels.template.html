@@ -3,14 +3,14 @@
   <div class="page-header">
     <h1>
     Channels
-    <small>{{vm.count}} channels out of {{vm.total}}</small></h1>
+    <small>{{vm.channels.length}} channels out of {{vm.total}}</small></h1>
   </div>
 
   <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-6">
-    
+    <div id="channelscroll"  style="overflow-y: scroll;height: 100vh;" class="col-xs-12 col-sm-6">
+    <div infinite-scroll='vm.listChannels()' infinite-scroll-area="channelscroll" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
       <div class="list-group-item list-group-item-default" ng-repeat="channel in vm.channels">
                   <span class="badge pull-left" ng-show="channel.isFavorite" >FAVORITE</span>
                   <h3 ><small>Channel Name</small>&nbsp;{{channel.name}}</h3>
@@ -19,6 +19,7 @@
                   
                   <p><small>Channel ID</small> <strong>{{channel.id}}</strong></p>
   
+      </div>
       </div>
       <p class="lead" ng-show="vm.tickets.length ===0">No channels...</p>
     </div>
