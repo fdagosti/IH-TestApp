@@ -15,6 +15,7 @@
     if (assetName){
       vm.query = {
         q: assetName,
+        limit: 10,
       };
     }else {
       vm.query = {
