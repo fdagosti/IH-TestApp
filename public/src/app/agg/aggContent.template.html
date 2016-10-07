@@ -127,7 +127,9 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-      <div ng-show="vm.busy" class="alert alert-info">Loading content from {{vm.query.offset}} to {{vm.query.offset+vm.query.limit}}...</div>
+      <div ng-show="vm.busy" class="alert alert-info">
+        <span us-spinner="{scale: 0.55, left:'7%', top:'38%'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Loading content from {{vm.query.offset}} to {{vm.query.offset+vm.query.limit}}...
+      </div>
     </div>
       </div>
     </div>
