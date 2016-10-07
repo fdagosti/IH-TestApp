@@ -83,13 +83,8 @@
         };
 
         var _getSandboxes = function(){
-            settings.getSandboxes()
-            .then(function(response){
-                vm.sandboxes = response.data;
-                vm.currentSandbox = settings.getCurrentSandbox();
-            }, function(error){
-                console.error(error);
-            })
+            vm.sandboxes = settings.getSandboxes();
+            vm.currentSandbox = settings.getCurrentSandbox();
         };
 
         vm.selectSandbox = function(sandbox){
@@ -98,6 +93,10 @@
         };
 
         _getSandboxes();
+
+        settings.subscribe($scope, "nav", function somethingChanged() {
+            vm.currentSandbox = settings.getCurrentSandbox();
+        });
 
         authentication.subscribe($scope, "nav", function somethingChanged() {
             _updateUser();

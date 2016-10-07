@@ -7,30 +7,35 @@
   settings.$inject = ["$window", "$http", "$rootScope", "authentication"];   
   function settings ($window, $http, $rootScope, authentication) {
 
-    var _saveSettings = function() {
-            $window.localStorage["InfiniteEPG-settings"] = JSON.stringify(_currentSandbox);
+    var _defaultSandboxes = [
+      {name: "Production", url: "https://apx.cisco.com/spvss/infinitehome/infinitetoolkit/v_sandbox_1/"},
+      {name: "IBC", url: "https://apx.cisco.com/spvss/infinitehome/infinitetoolkit/v2_ibc_2016/"},
+      {name: "Ctap 1.3", url: "http://ih-cis-vip.spvsstmedmz.cisco.com/ctap/r1.3.0/", proxy: true, headers: {'x-cisco-vcs-identity': '{"upId":"itk_0","hhId":"itk","devId":"63F2000C1AF85197", "deviceFeatures": ["COMPANION","ABR","ANDROID","WIFI-CHIP","PHONE","VG-DRM"],"cmdcDeviceType":"ANDROID","sessionId":"b705d50d-82f0-4ad5-afc7-a61b1bf29aeb","tenant":"k","region":"100","cmdcRegion":"16384~16639"}'}}
+    ];
+
+    var _saveDebugSettings = function() {
+            $window.localStorage["InfiniteEPG-debug-settings"] = JSON.stringify(_debugSettings);
         };
 
     var getSandboxes = function(){
-      return $http.get("/api/sandboxes").then(function(response){
-        if (!getCurrentSandbox()){
-          setCurrentSandbox(response.data[0]);
-        }
-         return response;
-      });
+      return _defaultSandboxes;
+      
     };
 
-    var _currentSandbox;
+    // var _currentSandbox;
+    var _debugSettings ={
+      proxy: "https://cisco-itk-proxy.herokuapp.com/",
+      
+      fakeVideo: true
+    };
 
    var getCurrentSandbox = function(){
-      var t = $window.localStorage["InfiniteEPG-settings"];
+
+      var t = $window.localStorage["InfiniteEPG-debug-settings"];
       if (t){
-          return JSON.parse(t);
+          _debugSettings = JSON.parse(t);
+          return _debugSettings.currentSandbox;
       }
-   };
-
-   var getSandboxURL = function(){
-
    };
 
    var getSandboxHeaders = function(){
@@ -45,14 +50,32 @@
    };
 
    var getProxy = function(){
-    return "https://cisco-itk-proxy.herokuapp.com/";
+    return _debugSettings.proxy;
    }
 
    var setCurrentSandbox = function(sandbox){
-    if (sandbox.proxy){sandbox.url = getProxy()+sandbox.url}
-    _currentSandbox = sandbox;
-    _saveSettings();
+    if (sandbox.proxy){
+      sandbox = {
+        name: sandbox.name,
+        url: getProxy()+sandbox.url,
+        proxy: sandbox.proxy,
+        headers: sandbox.headers
+      };
+    }
+    _debugSettings.currentSandbox = sandbox;
+    _saveDebugSettings();
     notify();
+   };
+
+   var setDebugSettings = function(debugSettings){
+    _debugSettings = debugSettings;
+    _saveDebugSettings();
+   };
+
+
+   var getDebugSettings = function(settings){
+      _debugSettings.sandboxes = getSandboxes();
+      return _debugSettings;
    };
 
     var notify = function(){
@@ -63,6 +86,13 @@
     var cbf = function(){
         cbs.forEach(function(cb){
             cb();
+        });
+    };
+
+    var getUserSettings = function(){
+      return $http.get(getCurrentSandbox().url + "userProfiles/me/settings",  {
+        headers: getSandboxHeaders(),
+        
         });
     };
 
@@ -84,6 +114,9 @@
      setCurrentSandbox : setCurrentSandbox,
      getSandboxHeaders : getSandboxHeaders,
      getProxy : getProxy,
+     getUserSettings : getUserSettings,
+     getDebugSettings: getDebugSettings,
+     setDebugSettings: setDebugSettings
    };
  }
 })();

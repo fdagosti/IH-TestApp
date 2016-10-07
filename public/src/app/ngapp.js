@@ -50,6 +50,11 @@
                  controller: "loginCtrl",
                  controllerAs: "vm"
             })
+            .when("/settings", {
+                templateUrl: "src/app/settings/settings.template.html",
+                 controller: "settingsCtrl",
+                 controllerAs: "vm"
+            })
             .when("/video/:locator", {
                 templateUrl: "src/app/video/video.template.html",
                  controller: "videoCtrl",

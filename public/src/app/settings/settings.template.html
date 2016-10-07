@@ -1,0 +1,63 @@
+
+<div class="container">
+    <page-header content="vm.pageHeader"></page-header>
+
+    <div class="row" ng-init="vm.toShow='debug'">
+        <div class="col-md-4 col-xs-12">
+            <div class="list-group">
+                <a ng-class="vm.toShow==='user'?'active':''" href="" ng-click="vm.toShow='user'" type="button" class="list-group-item">User Profile</a>
+                <a ng-class="vm.toShow==='debug'?'active':''" href="" ng-click="vm.toShow='debug'" type="button" class="list-group-item">Debug Settings</a>
+            </div>
+        </div>
+        <div class="col-md-8 col-xs-12">
+            <div ng-show="vm.toShow==='user'" class="panel panel-default">
+                <div class="panel-heading">User Profile Settings</div>
+                <div class="panel-body">
+                    <div role="alert" ng-show="vm.userError" class="alert alert-danger">{{vm.userError}}</div>
+                    <div ng-repeat="(settingName, settingValue) in vm.settings">
+                        <h4>{{settingName | settingsFilter}}  <span class="pull-right">{{settingValue | settingsValueFilter}}</span></h4>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div ng-show="vm.toShow==='debug'" class="panel panel-default">
+                    <div class="panel-heading">
+                    Debug Settings
+                    </div>
+                    <div class="panel-body">
+                        <form action="">
+                            <div class="checkbox">
+                                <label>
+                                  <input type="checkbox" ng-model="vm.debugSettings.fakeVideo" ng-change="vm.saveSettings()"> Fake Videos
+                                </label>
+                                <p class="help-block">Switch the real videos by fake HLS videos coming from AWS S3. Useful to bypass video playback issues because of CTAP issues</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="proxyInput">Proxy</label>
+                                <input class="form-control" id="proxyInput" type="text" ng-disabled="true" ng-model="vm.debugSettings.proxy">
+                                <p class="help-block">Proxy server to bypass CORS issues</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="">CTAP Sources</label>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="radio" ng-repeat="sandbox in vm.debugSettings.sandboxes">
+                                          <label>
+                                            <input type="radio" name="sandboxRadio" ng-model="vm.currentSandbox" id="optionsRadios1" ng-change="vm.setCurrentSandbox($index)" ng-value="sandbox.name">
+                                            {{sandbox.name}}  <em><small><span ng-show="sandbox.proxy">proxy</span> <span ng-show="sandbox.headers">Custom Headers</span></small></em>
+                                          </label>
+                                          <span class="pull-right">{{sandbox.url}}</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                                </div>
+                            
+                        </form>
+                    </div> 
+            </div>
+        </div>
+    </div>
+</div>

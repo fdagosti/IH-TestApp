@@ -25,6 +25,13 @@
         <a ng-show="vm.isLoggedIn" ng-href="/#categories" class="btn title-button hero-btn btn-lg btn-primary" >
           Categories
         </a>
+        <a ng-show="vm.isLoggedIn" ng-href="/#settings" class="btn title-button hero-btn btn-lg btn-primary" >
+          settings
+        </a>
+        <a ng-show="vm.isLoggedIn" ng-click="vm.showPin()" href="" >
+          <span class="btn title-button hero-btn btn-lg btn-primary" ng-hide="vm.pinChecked">Check your Pin</span>
+          <span class="btn title-button hero-btn btn-lg btn-success" ng-show="vm.pinChecked">Pin Checked !</span>
+        </a>
     </div>
   </div>
 </div>
