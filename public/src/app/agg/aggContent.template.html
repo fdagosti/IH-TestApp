@@ -9,8 +9,10 @@
   <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
 
   <div class="row">
-    
-    <div id="titou" style="overflow-y: scroll;height: 75vh;" class="col-xs-12 col-sm-7">
+    <div class="col-xs-12 col-sm-7">
+      
+    <span ng-show="vm.busy" us-spinner="{color:'#FFFFFF',scale:1.5}"  ></span>
+    <div id="titou" style="overflow-y: scroll;height: 75vh;">
       <div infinite-scroll='vm.getContent()' infinite-scroll-area="titou" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
         <div class="list-group-item" ng-repeat="content in vm.content">
           <div class="media">
@@ -43,6 +45,7 @@
         </div>
       </div>
       <div class="lead" ng-show="vm.category.categories.length ===0">No SubCategories found for the {{vm.category.name}} Category</div>
+    </div>
     </div>
     <div class="col-xs-12 col-sm-5">
       <p class="lead">This screens display all the information from a dedicated category
@@ -128,7 +131,7 @@
       <div class="row">
         <div class="col-xs-12">
       <div ng-show="vm.busy" class="alert alert-info">
-        <span us-spinner="{scale: 0.55, left:'7%', top:'38%'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Loading content from {{vm.query.offset}} to {{vm.query.offset+vm.query.limit}}...
+        Loading content from {{vm.query.offset}} to {{vm.query.offset+vm.query.limit}}...
       </div>
     </div>
       </div>

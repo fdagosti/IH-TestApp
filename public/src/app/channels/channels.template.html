@@ -10,8 +10,10 @@
   
   
   <div class="row">
-  
-    <div id="channelscroll"  style="overflow-y: scroll;height: 75vh;" class="col-xs-12 col-sm-6">
+    <div class="col-xs-12 col-sm-6">
+      
+    <span ng-show="vm.busy" us-spinner="{color:'#FFFFFF',scale:1.5}"  ></span>
+    <div id="channelscroll"  style="overflow-y: scroll;height: 75vh;">
     <div infinite-scroll='vm.listChannels()' infinite-scroll-area="channelscroll" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
       <div class="list-group-item list-group-item-default" ng-repeat="channel in vm.channels">
                   <span class="badge pull-left" ng-show="channel.isFavorite" >FAVORITE</span>
@@ -24,6 +26,7 @@
       </div>
       </div>
       <p class="lead" ng-show="vm.tickets.length ===0">No channels...</p>
+    </div>
     </div>
     <div class="col-xs-12 col-sm-6">
       <p class="lead">This screens display all the information that is provided by the "Channels" URL on IH
@@ -82,7 +85,7 @@
       <div class="row">
       <div class="col-xs-12">
     <div ng-show="vm.busy" class="alert alert-info">
-        <span us-spinner="{scale: 0.55, left:'7%', top:'38%'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> Loading channels from {{vm.query.offset}} to {{vm.query.offset+vm.query.limit}}...
+        Loading channels from {{vm.query.offset}} to {{vm.query.offset+vm.query.limit}}...
     </div>
     </div>
   </div>
