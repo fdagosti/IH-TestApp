@@ -1,22 +1,14 @@
-<div class="container  page-header" style="margin-top:60px;">
+<div ng-click="vm.showTemporaryUI()" class="container  page-header" style="margin-top:60px;">
 
-  <div class="row well well-lg">
+  <div class="row">
+    <div class="col-xs-12">
+      <div style="width: 100%;height: 50vh"></div>
+    </div>
+  </div>
+  <div ng-if="vm.showUi" class="row well toto">
     <div class="col-xs-12 col-sm-7">
     <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-      <div class="embed-responsive embed-responsive-16by9">
-        <video class="vjs-default-skin embed-responsive embed-responsive-16by9" preload="auto" id="contentViewer" autoplay="true">
-        
-        </video>
-        <div role="alert" ng-show="vm.hlsError" class="alert alert-danger">
-          Sorry, your browser does not support HLS content. If you're using chrome on Mac, consider using Safari instead<br> Url to Play: <a ng-href="{{vm.hlsError}}">{{vm.hlsError}}</a>
-        </div>
-        <div class="alert alert-warning" ng-show="vm.playbackError">{{vm.playbackError}}</div>
-      </div>
-      <!-- <div class="btn-group btn-group-justified" role="group">
-        <a class="btn btn-default">Play</a>
-        <a class="btn btn-default">Pause</a>
-        <a class="btn btn-default">Stop</a>
-      </div> -->
+      
       <uib-accordion >
         <div uib-accordion-group class="panel-default" heading="Test Zone">
           <div class="form-group">
@@ -35,7 +27,7 @@
           </ul>
         </div>
       </uib-accordion>
-    </div>
+      </div>
     <div class="col-xs-12 col-sm-5">
     <p class="lead">The IH Platform provide video content in HLS format. Support in Chrome is software based</p>
     <div ng-show="vm.fakeVideo" class="alert alert-info">Fake Video Playing</div>

@@ -60,6 +60,11 @@
                  controller: "videoCtrl",
                  controllerAs: "vm"
             })
+            .when("/video", {
+                templateUrl: "src/app/video/video.template.html",
+                 controller: "videoCtrl",
+                 controllerAs: "vm"
+            })
             .otherwise({redirectTo: "/"});
 
         $locationProvider.html5Mode(false);

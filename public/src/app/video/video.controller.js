@@ -1,8 +1,7 @@
 ((function(){
 
-angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, devices, settings) {
+angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, $timeout, devices, settings) {
    var vm = this;
-    $scope.pageClass = 'video-page';
     vm.fakeVideo = settings.getDebugSettings().fakeVideo;
 
   vm.playLocator = function(locator){
@@ -35,7 +34,7 @@ angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routePar
         src = {"type":"video/mp4", "src":vm.videosrc.src};
       }
     }
-    var player = videojs('contentViewer');
+    var player = videojs('video-background');
     player.src(src);
     player.play();
     vm.videosrc = src;
@@ -46,7 +45,18 @@ angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routePar
   if (locator){
     vm.playLocator(locator);
   } 
+
+  var timer;
+  vm.showTemporaryUI = function(){
+    vm.showUi = true;
+    $timeout.cancel(timer);
+    timer = $timeout(function(){
+      vm.showUi = false;
+      timer = null;
+    },5000);
+  };
  
+  vm.showTemporaryUI();
 });
 
 })());
