@@ -96,6 +96,9 @@
         });
     };
 
+    if(!getCurrentSandbox()){
+      setCurrentSandbox(getSandboxes()[0]);
+    }
 
    return {
      subscribe: function(scope, id, callback) {
