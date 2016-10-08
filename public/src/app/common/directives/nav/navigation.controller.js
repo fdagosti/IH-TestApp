@@ -21,6 +21,41 @@
               $location.path("/video");
             }
           });
+        hotkeys.add({
+            combo: 'v',
+            description: 'Back to Full Screen Video',
+            callback: function() {
+              $location.path("/video");
+            }
+          });
+        hotkeys.add({
+            combo: 'c',
+            description: 'Go to Content Screen',
+            callback: function() {
+              $location.path("/agg/content");
+            }
+          });
+        hotkeys.add({
+            combo: 'h',
+            description: 'Go to channels',
+            callback: function() {
+              $location.path("/channels");
+            }
+          });
+        hotkeys.add({
+            combo: 'g',
+            description: 'Go to grid',
+            callback: function() {
+              $location.path("/agg/grid");
+            }
+          });
+        hotkeys.add({
+            combo: 'a',
+            description: 'Go to category',
+            callback: function() {
+              $location.path("/categories");
+            }
+          });
 
         var s = 1000;
         var m = 60*s;

@@ -23,7 +23,6 @@
         
       </form>
       <ul class="nav navbar-nav navbar-right">  
-        <li><a href="/#video/" >VIDEO</a></li>
         <li ng-hide="navvm.isLoggedIn"><a href="/#login/?page={{navvm.currentPath()}}" data-toggle="collapse" data-target=".navbar-collapse">Login</a></li>
         <li ng-show="navvm.isLoggedIn" class="dropdown">
           <a href="" class="dropdown-toggle" data-toggle="dropdown">
@@ -31,11 +30,12 @@
           </a>
           <ul class="dropdown-menu" role="menu">
            <li class="dropdown-header">{{navvm.currentUser.client_id}}</li>
-            <li ><a href="/#channels" >Channels Screen</a></li>
-            <li ><a href="/#categories" >Categories Screen</a></li>
-            <li ><a href="/#agg/grid" >Grid Screen</a></li>
-            <li ><a href="/#agg/content" >Content Screen</a></li>
-            <li ><a href="/#settings" >settings</a></li>
+            <li ><a href="/#channels" >C<u>h</u>annels Screen</a></li>
+            <li ><a href="/#categories" >C<u>a</u>tegories Screen</a></li>
+            <li ><a href="/#agg/grid" ><u>G</u>rid Screen</a></li>
+            <li ><a href="/#agg/content" ><u>C</u>ontent Screen</a></li>
+            <li ><a href="/#settings" ><u>S</u>ettings</a></li>
+            <li ><a href="/#video" >Back to <u>V</u>ideo</a></li>
             <li ><a ng-click="navvm.showPin()" href="" ><span ng-class="navvm.pinChecked?'text-success':'text-danger'">Check your Pin</span></a></li>
             <li role="separator" class="divider"></li>
             <li><a href="" ng-click="navvm.logout()" data-toggle="collapse" data-target=".navbar-collapse">Logout</a></li>
