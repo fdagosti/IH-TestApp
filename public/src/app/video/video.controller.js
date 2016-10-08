@@ -1,8 +1,15 @@
 ((function(){
 
-angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, $timeout, devices, settings) {
+angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, $timeout, devices, settings, hotkeys) {
    var vm = this;
     vm.fakeVideo = settings.getDebugSettings().fakeVideo;
+
+    hotkeys.bindTo($scope)
+    .add({
+      combo: 'space',
+      description: 'Toggle the banner visibility',
+      callback: function() {vm.showUi?vm.showUi=false:vm.showTemporaryUI();}
+    })
 
   vm.playLocator = function(locator){
     devices.getPlaySession(locator)

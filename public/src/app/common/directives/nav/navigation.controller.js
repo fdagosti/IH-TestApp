@@ -3,8 +3,8 @@
     .module("InfiniteEPG")
     .controller("navigationCtrl", navigationCtrl);
 
-    navigationCtrl.$inject = ["$scope", "$location", "authentication", "settings", "suggest", "pins"];
-    function navigationCtrl($scope, $location, authentication, settings, suggest, pins){
+    navigationCtrl.$inject = ["$scope", "$location", "authentication", "settings", "suggest", "pins", "hotkeys"];
+    function navigationCtrl($scope, $location, authentication, settings, suggest, pins, hotkeys){
         var vm = this;
 
         var _updateUser = function(){
@@ -14,6 +14,13 @@
 
         _updateUser();
 
+        hotkeys.add({
+            combo: 'esc',
+            description: 'Back to Full Screen Video',
+            callback: function() {
+              $location.path("/video");
+            }
+          });
 
         var s = 1000;
         var m = 60*s;
