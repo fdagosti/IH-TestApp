@@ -56,6 +56,13 @@
               $location.path("/categories");
             }
           });
+        hotkeys.add({
+            combo: 's',
+            description: 'Go to Settings',
+            callback: function() {
+             $location.path("/settings"); 
+            }
+          });
 
         var s = 1000;
         var m = 60*s;

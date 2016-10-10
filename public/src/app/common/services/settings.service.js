@@ -14,7 +14,7 @@
     ];
 
     var _saveDebugSettings = function() {
-            $window.localStorage["InfiniteEPG-debug-settings"] = JSON.stringify(_debugSettings);
+            $window.localStorage["InfiniteEPG-debug-settings-v1"] = JSON.stringify(_debugSettings);
         };
 
     var getSandboxes = function(){
@@ -25,13 +25,17 @@
     // var _currentSandbox;
     var _debugSettings ={
       proxy: "https://cisco-itk-proxy.herokuapp.com/",
-      
-      fakeVideo: true
+      fakeVideo: true,
+      fakeVideosList: [
+        {"type":"application/x-mpegURL", "src":"https://s3-eu-west-1.amazonaws.com/infinite-epg/lasvegas-vod/lasvegas.m3u8"},
+        { "type": 'video/mp4', src: 'https://s3-eu-west-1.amazonaws.com/infinite-epg/small.mp4' },
+        { "type": 'video/mp4', src: 'https://s3-eu-west-1.amazonaws.com/infinite-epg/big_buck_bunny.mp4' }
+      ]
     };
 
    var getCurrentSandbox = function(){
 
-      var t = $window.localStorage["InfiniteEPG-debug-settings"];
+      var t = $window.localStorage["InfiniteEPG-debug-settings-v1"];
       if (t){
           _debugSettings = JSON.parse(t);
           return _debugSettings.currentSandbox;

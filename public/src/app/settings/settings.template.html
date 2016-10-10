@@ -27,12 +27,25 @@
                     </div>
                     <div class="panel-body">
                         <form action="">
-                            <div class="checkbox">
-                                <label>
-                                  <input type="checkbox" ng-model="vm.debugSettings.fakeVideo" ng-change="vm.saveSettings()"> Fake Videos
-                                </label>
-                                <p class="help-block">Switch the real videos by fake HLS videos coming from AWS S3. Useful to bypass video playback issues because of CTAP issues</p>
+                            <div class="form-group">
+                            <label for="">Fake Videos</label>
+                            <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="checkbox">
+                                    <label>
+                                      <input type="checkbox" ng-model="vm.debugSettings.fakeVideo" ng-change="vm.saveSettings()"> Enable Fake Videos
+                                    </label>
+                                </div>
+                                    <p class="help-block">Switch the real videos by fake videos coming from the following list: </p>
+                                <ul class="list-unstyled">
+                                    <li ng-repeat="fakeVideo in vm.debugSettings.fakeVideosList">
+                                        {{fakeVideo.src}}
+                                    </li>
+                                </ul>
+                                </div>
+                                </div>
                             </div>
+
                             <div class="form-group">
                                 <label for="proxyInput">Proxy</label>
                                 <input class="form-control" id="proxyInput" type="text" ng-disabled="true" ng-model="vm.debugSettings.proxy">

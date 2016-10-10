@@ -2,7 +2,7 @@
 
 angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, $timeout, devices, settings, hotkeys) {
    var vm = this;
-    vm.fakeVideo = settings.getDebugSettings().fakeVideo;
+    vm.fakeVideo = settings.getDebugSettings().fakeVideo?settings.getDebugSettings().fakeVideosList[Math.floor(Math.random()*4)]:null;
 
     hotkeys.bindTo($scope)
     .add({
@@ -17,7 +17,7 @@ angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routePar
         vm.playSession = response.data;
         var videoToPlay = {"type":"application/x-mpegURL", "src":settings.getProxy()+vm.playSession.links.playUrl.href};
         if (vm.fakeVideo){
-          videoToPlay.src = "https://s3-eu-west-1.amazonaws.com/infinite-epg/lasvegas-vod/lasvegas.m3u8";
+          videoToPlay = vm.fakeVideo;
         }
         vm.insertLinkIntoVideoTag(videoToPlay);        
       }, function(error){
@@ -25,13 +25,10 @@ angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routePar
           var errString = (error.status && error.statusText)?error.status+" "+error.statusText:error.toString;
           vm.error = "Could not retrieve playSession from IH server. Consider to log out and log in again. "+ errString;
         }else{
-          var videoToPlay = {"type":"application/x-mpegURL", "src":"https://s3-eu-west-1.amazonaws.com/infinite-epg/lasvegas-vod/lasvegas.m3u8"};
-          vm.insertLinkIntoVideoTag(videoToPlay);        
+          vm.insertLinkIntoVideoTag(vm.fakeVideo);        
         }
       });
     };
-
-
 
   vm.insertLinkIntoVideoTag = function(src){
     if (!src){
