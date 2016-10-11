@@ -2,7 +2,10 @@
 
 angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, $timeout, devices, settings, hotkeys) {
    var vm = this;
-    vm.fakeVideo = settings.getDebugSettings().fakeVideo?settings.getDebugSettings().fakeVideosList[Math.floor(Math.random()*4)]:null;
+    vm.fakeVideo = settings.getDebugSettings().fakeVideo?settings.getRandomFakeVideo():null;
+
+    // retrieving the currently playing content from the video tag itself
+    vm.videosrc = {src: videojs('video-background').src()};
 
     hotkeys.bindTo($scope)
     .add({

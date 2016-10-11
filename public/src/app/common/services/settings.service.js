@@ -123,7 +123,11 @@
      getProxy : getProxy,
      getUserSettings : getUserSettings,
      getDebugSettings: getDebugSettings,
-     setDebugSettings: setDebugSettings
+     setDebugSettings: setDebugSettings,
+     getRandomFakeVideo : function(){
+      var idx = Math.floor(Math.random()*(_debugSettings.fakeVideosList.length));
+        return _debugSettings.fakeVideosList[idx];
+      }
    };
  }
 })();

@@ -4,11 +4,14 @@
 
     <div class="row" ng-init="vm.toShow='debug'">
         <div class="col-md-4 col-xs-12">
-            <div class="list-group">
-                <a ng-class="vm.toShow==='user'?'active':''" href="" ng-click="vm.toShow='user'" type="button" class="list-group-item">User Profile</a>
-                <a ng-class="vm.toShow==='debug'?'active':''" href="" ng-click="vm.toShow='debug'" type="button" class="list-group-item">Debug Settings</a>
+            <div class="well list-group">
+                <a ng-class="vm.toShow==='user'?'active':''" href="" ng-click="vm.toShow='user'" type="button" class="list-group-item no-hover">User Profile</a>
+                <a ng-class="vm.toShow==='debug'?'active':''" href="" ng-click="vm.toShow='debug'" type="button" class="list-group-item no-hover">Debug Settings</a>
+                <a ng-class="vm.toShow==='AdSuite'?'active':''" href="" ng-click="vm.toShow='AdSuite'" type="button" class="list-group-item no-hover">AdSuite Settings</a>
             </div>
         </div>
+
+
         <div class="col-md-8 col-xs-12">
             <div ng-show="vm.toShow==='user'" class="panel panel-default">
                 <div class="panel-heading">User Profile Settings</div>
@@ -67,10 +70,23 @@
                                 </div>
 
                                 </div>
+
+                            
                             
                         </form>
                     </div> 
             </div>
+
+            
+            <div ng-show="vm.toShow==='AdSuite'" class="panel panel-default">
+                <div class="panel-heading">
+                    Adsuite Settings
+                    </div>
+                    <div class="panel-body">
+                    Coming Soon...
+                    </div>
+            </div>
+
         </div>
     </div>
 </div>
