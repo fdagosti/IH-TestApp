@@ -3,35 +3,35 @@
   <div class="row well well-lg">
     <div class="col-md-12">
     <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-      <h2 class="text-center">Infinite EPG 4 Fun</h2>
+        <h2 class="text-center">Infinite EPG 4 Fun</h2>
 
-        <p class="lead">Use this application to navigate through the various APIs and features of Infinite Home
+        <p class="lead text-center">Use this application to navigate through the various APIs and features of Infinite Home
         </p>
 
-      
-      
         <a ng-hide="vm.isLoggedIn" ng-href="/#login?page={{vm.returnPage}}" class="btn title-button hero-btn btn-lg btn-primary" >
         Log into the Infinite Platform
         </a>
-        <a ng-show="vm.isLoggedIn" ng-href="/#channels" class="btn title-button hero-btn btn-lg btn-primary" >
-          Channels
-        </a>
-        <a ng-show="vm.isLoggedIn" ng-href="/#agg/grid" class="btn title-button hero-btn btn-lg btn-primary" >
-          Grid
-        </a>
-        <a ng-show="vm.isLoggedIn" ng-href="/#agg/content" class="btn title-button hero-btn btn-lg btn-primary" >
-          Content
-        </a>
-        <a ng-show="vm.isLoggedIn" ng-href="/#categories" class="btn title-button hero-btn btn-lg btn-primary" >
-          Categories
-        </a>
-        <a ng-show="vm.isLoggedIn" ng-href="/#settings" class="btn title-button hero-btn btn-lg btn-primary" >
-          settings
-        </a>
-        <a ng-show="vm.isLoggedIn" ng-click="vm.showPin()" href="" >
-          <span class="btn title-button hero-btn btn-lg btn-primary" ng-hide="vm.pinChecked">Check your Pin</span>
-          <span class="btn title-button hero-btn btn-lg btn-success" ng-show="vm.pinChecked">Pin Checked !</span>
-        </a>
+      
+        <div class="text-center">
+          <div ng-show="vm.isLoggedIn" class="btn-group" role="group">
+            <a ng-href="/#channels" class="btn title-button btn-default" >
+              Channels
+            </a>
+            <a ng-href="/#agg/grid" class="btn title-button btn-default" >
+              Grid
+            </a>
+            <a ng-href="/#agg/content" class="btn title-button btn-default" >
+              Content
+            </a>
+            <a ng-href="/#categories" class="btn title-button btn-default" >
+              Categories
+            </a>
+            <a ng-href="/#settings" class="btn title-button btn-default" >
+              settings
+            </a>
+            <a ng-click="vm.showPin()" class="btn title-button btn-default" ng-hide="vm.pinChecked">Check your Pin</a>
+          </div>
+        </div>
     </div>
   </div>
 </div>
