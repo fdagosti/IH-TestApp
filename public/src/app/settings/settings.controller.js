@@ -41,6 +41,9 @@
         };
         vm.getAdSuiteSettings();
         vm.getAdSuiteStatus();
+        vm.setAdSuiteCurrentUser = function(){
+            adsuite.setCurrentUser(vm.adsuiteSettings.currentUser);
+        };
 
         vm.getDebugSettings = function(){
             vm.debugSettings = settings.getDebugSettings();

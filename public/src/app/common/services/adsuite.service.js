@@ -10,6 +10,10 @@
     var _adSuiteSettings = {
       enabled : false,
       baseUrl: "http://spvss-adsuite.cisco.com/manifestManager",
+      currentUser:"bob",
+      users: [
+      "bob", "elsa"
+      ]
     };
 
     var getStatus = function(){
@@ -32,7 +36,30 @@
     };
 
     var isEnabled = function(){
+      getSettings();
       return _adSuiteSettings.enabled;
+    };
+
+    var createAdSession = function(sourceUrl){
+      var randomSession = Math.floor(Math.random()*10000000);
+      if (sourceUrl.startsWith("https://")){
+        sourceUrl = sourceUrl.substring(8);
+      }else if (sourceUrl.startsWith("http://")){
+        sourceUrl = sourceUrl.substring(7);
+      }
+      return $http.post(_adSuiteSettings.baseUrl+"/session/"+randomSession+"/adRules", "",{
+        params: {
+          contentInstanceId : "programid://lasvegas",
+          deviceId: "randomName",
+          playUrl: sourceUrl,
+          subscriberId: _adSuiteSettings.currentUser
+        }
+      });
+    };
+
+    var setCurrentUser = function(user){
+      _adSuiteSettings.currentUser = user;
+      _saveAdsuiteSettings();
     };
 
     var _saveAdsuiteSettings = function() {
@@ -53,6 +80,8 @@
      isEnabled: isEnabled,
      enable: enable,
      getSettings: getSettings,
+     setCurrentUser: setCurrentUser,
+     createAdSession: createAdSession,
      
    };
  }
