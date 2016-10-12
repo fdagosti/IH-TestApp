@@ -68,11 +68,8 @@
                                         
                                     </div>
                                 </div>
-
-                                </div>
-
-                            
-                            
+                            </div>
+                            <button class="btn btn-danger" ng-click="vm.resetDebugSettings()">Reset Debug settings</button>
                         </form>
                     </div> 
             </div>
@@ -108,6 +105,7 @@
                         </div>
                         <p ng-show="vm.adSuiteStatusOk" ><span class="text-success glyphicon glyphicon-ok"> </span> &nbsp; {{vm.adSuiteStatusOk}}</p>
                         <p ng-show="vm.adSuiteStatusError"><span class="text-danger glyphicon glyphicon-remove">  </span> &nbsp; Service Down</p>
+                        <button class="btn btn-danger" ng-click="vm.resetAdSuiteSettings()">Reset AdSuite settings</button>
                     </div>
             </div>
 

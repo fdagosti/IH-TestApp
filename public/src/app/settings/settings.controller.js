@@ -44,12 +44,20 @@
         vm.setAdSuiteCurrentUser = function(){
             adsuite.setCurrentUser(vm.adsuiteSettings.currentUser);
         };
+        vm.resetAdSuiteSettings = function(){
+            adsuite.reset();
+            vm.getAdSuiteSettings();
+        };
 
         vm.getDebugSettings = function(){
             vm.debugSettings = settings.getDebugSettings();
             
         };
         vm.getDebugSettings();
+
+        vm.resetDebugSettings = function(){
+            settings.resetDebugSettings();
+        };
 
         vm.setCurrentSandbox = function(idx){
             settings.setCurrentSandbox(vm.debugSettings.sandboxes[idx]);
@@ -59,13 +67,11 @@
             settings.setDebugSettings(vm.debugSettings);
         };
 
-
-
-
         vm.getUserSettings();
         vm.currentSandbox = settings.getCurrentSandbox().name;
         settings.subscribe($scope, "settings", function somethingChanged() {
             vm.getUserSettings();
+            vm.getDebugSettings();
             vm.currentSandbox = settings.getCurrentSandbox().name;
         });
 

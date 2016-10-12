@@ -22,8 +22,7 @@
       
     };
 
-    // var _currentSandbox;
-    var _debugSettings ={
+    var _defaultDebugSettings = {
       proxy: "https://cisco-itk-proxy.herokuapp.com/",
       fakeVideo: true,
       fakeVideosList: [
@@ -33,6 +32,9 @@
       ]
     };
 
+    // var _currentSandbox;
+    var _debugSettings =_defaultDebugSettings;
+
    var getCurrentSandbox = function(){
 
       var t = $window.localStorage["InfiniteEPG-debug-settings-v1"];
@@ -40,6 +42,12 @@
           _debugSettings = JSON.parse(t);
           return _debugSettings.currentSandbox;
       }
+   };
+
+   var resetDebugSettings = function(){
+    $window.localStorage.removeItem("InfiniteEPG-debug-settings-v1");
+    _debugSettings = _defaultDebugSettings;
+    setCurrentSandbox(getSandboxes()[0]);
    };
 
    var getSandboxHeaders = function(){
@@ -123,6 +131,7 @@
      getProxy : getProxy,
      getUserSettings : getUserSettings,
      getDebugSettings: getDebugSettings,
+     resetDebugSettings: resetDebugSettings,
      setDebugSettings: setDebugSettings,
      getRandomFakeVideo : function(){
       var idx = Math.floor(Math.random()*(_debugSettings.fakeVideosList.length));

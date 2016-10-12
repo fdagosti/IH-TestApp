@@ -7,7 +7,7 @@
   adsuite.$inject = ["$window","$http"];   
   function adsuite($window, $http) {
 
-    var _adSuiteSettings = {
+    var _adSuiteDefaults = {
       enabled : false,
       baseUrl: "http://spvss-adsuite.cisco.com/manifestManager",
       currentUser:"bob",
@@ -15,6 +15,17 @@
       "bob", "elsa"
       ]
     };
+
+    var copyDefaults = function(){
+      return {
+        enabled : _adSuiteDefaults.enabled,
+      baseUrl: _adSuiteDefaults.baseUrl,
+      currentUser:_adSuiteDefaults.currentUser,
+      users: _adSuiteDefaults.users
+      };
+    };
+
+    var _adSuiteSettings = copyDefaults();
 
     var getStatus = function(){
 
@@ -38,6 +49,11 @@
     var isEnabled = function(){
       getSettings();
       return _adSuiteSettings.enabled;
+    };
+
+    var reset = function(){
+      $window.localStorage.removeItem("InfiniteEPG-adsuite-settings");
+      _adSuiteSettings = copyDefaults();
     };
 
     var createAdSession = function(sourceUrl){
@@ -81,6 +97,7 @@
      enable: enable,
      getSettings: getSettings,
      setCurrentUser: setCurrentUser,
+     reset: reset,
      createAdSession: createAdSession,
      
    };
