@@ -83,7 +83,13 @@
                     AdSuite Settings
                     </div>
                     <div class="panel-body">
-                        <div role="alert" class="alert alert-warning">To interact with the AdSuite service, you need to be on the Cisco Intranet</div>
+                        <div role="alert" class="alert alert-warning">To interact with the AdSuite service, you need:
+                         <ul>
+                             <li>to be on the Cisco Intranet</li>
+                             <li>to use http instead of https on your browser (just remove the s in http in the app's address) </li>
+                             
+                         </ul>
+                         </div>
                         <div class="checkbox">
                             <label>
                               <input type="checkbox" ng-model="vm.adsuiteSettings.enabled" ng-change="vm.enableAdSuite()"> Enable AdSuite
