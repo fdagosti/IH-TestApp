@@ -80,10 +80,20 @@
             
             <div ng-show="vm.toShow==='AdSuite'" class="panel panel-default">
                 <div class="panel-heading">
-                    Adsuite Settings
+                    AdSuite Settings
                     </div>
                     <div class="panel-body">
-                    Coming Soon...
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" ng-model="vm.adsuiteSettings.enabled" ng-change="vm.enableAdSuite()"> Enable AdSuite
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="proxyInput">AdSuite Base URL</label>
+                            <input class="form-control" id="proxyInput" type="text" ng-disabled="true" ng-model="vm.adsuiteSettings.baseUrl">
+                        </div>
+                        <p ng-show="vm.adSuiteStatusOk" ><span class="text-success glyphicon glyphicon-ok"> </span> &nbsp; {{vm.adSuiteStatusOk}}</p>
+                        <p ng-show="vm.adSuiteStatusError"><span class="text-danger glyphicon glyphicon-remove">  </span> &nbsp; Service Down</p>
                     </div>
             </div>
 

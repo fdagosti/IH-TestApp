@@ -3,8 +3,8 @@
         .module("InfiniteEPG")
         .controller("settingsCtrl", settingsCtrl);
 
-    settingsCtrl.$inject = ["$scope","$location", "authentication", "settings"];
-    function settingsCtrl($scope, $location, authentication, settings) {
+    settingsCtrl.$inject = ["$scope","$location", "authentication", "settings", "adsuite"];
+    function settingsCtrl($scope, $location, authentication, settings, adsuite) {
         var vm = this;
 
         vm.pageHeader = {
@@ -23,19 +23,41 @@
             });
         };
 
+        vm.getAdSuiteSettings = function(){
+            vm.adsuiteSettings = adsuite.getSettings();
+        };
+        vm.enableAdSuite = function(){
+            adsuite.enable(vm.adsuiteSettings.enabled);
+        };
+        vm.getAdSuiteStatus = function(){
+            adsuite.getStatus()
+            .then(function(response){
+                vm.adSuiteStatusOk = response.data;
+                vm.adSuiteStatusError = null;
+            }, function(error){
+                vm.adSuiteStatusOk = null;
+                vm.adSuiteStatusError = error.data;
+            }); 
+        };
+        vm.getAdSuiteSettings();
+        vm.getAdSuiteStatus();
+
         vm.getDebugSettings = function(){
             vm.debugSettings = settings.getDebugSettings();
             
-        }
+        };
         vm.getDebugSettings();
 
         vm.setCurrentSandbox = function(idx){
             settings.setCurrentSandbox(vm.debugSettings.sandboxes[idx]);
-        }
+        };
 
         vm.saveSettings = function(){
             settings.setDebugSettings(vm.debugSettings);
         };
+
+
+
 
         vm.getUserSettings();
         vm.currentSandbox = settings.getCurrentSandbox().name;

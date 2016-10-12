@@ -15,7 +15,7 @@
 
     var _saveDebugSettings = function() {
             $window.localStorage["InfiniteEPG-debug-settings-v1"] = JSON.stringify(_debugSettings);
-        };
+    };
 
     var getSandboxes = function(){
       return _defaultSandboxes;
@@ -49,13 +49,13 @@
       }else{
         return {
           Authorization: "Bearer "+authentication.getAccessToken()
-        }
+        };
       }
    };
 
    var getProxy = function(){
     return _debugSettings.proxy;
-   }
+   };
 
    var setCurrentSandbox = function(sandbox){
     if (sandbox.proxy){

@@ -29,7 +29,7 @@
     return function (settingsName) {
       return settings[settingsName];
     };
-  };
+  }
 
   function settingsValueFilter() {
     return function(settingValue){
@@ -38,5 +38,5 @@
       }
       return settingValue;
     };
-  };
+  }
 })();

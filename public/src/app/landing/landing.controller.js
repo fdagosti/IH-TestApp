@@ -13,7 +13,7 @@ vm.returnPage = $location.search().page || "/";
 
   vm.login = function(){
     authentication.login();
-  }
+  };
 
   vm.showPin = function(){
             vm.pinChecked = false;
