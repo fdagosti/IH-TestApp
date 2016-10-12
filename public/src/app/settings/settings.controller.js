@@ -36,7 +36,7 @@
                 vm.adSuiteStatusError = null;
             }, function(error){
                 vm.adSuiteStatusOk = null;
-                vm.adSuiteStatusError = error.data;
+                vm.adSuiteStatusError = "Service Not OK";
             }); 
         };
         vm.getAdSuiteSettings();
