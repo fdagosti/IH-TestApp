@@ -33,8 +33,16 @@
       ]
     };
 
+    var copyDefaults = function(){
+      return {
+        proxy : _defaultDebugSettings.proxy,
+        fakeVideo: _defaultDebugSettings.fakeVideo,
+        fakeVideosList:_defaultDebugSettings.fakeVideosList,
+      };
+    };
+
     // var _currentSandbox;
-    var _debugSettings =_defaultDebugSettings;
+    var _debugSettings =copyDefaults();
 
    var getCurrentSandbox = function(){
 
@@ -47,7 +55,7 @@
 
    var resetDebugSettings = function(){
     $window.localStorage.removeItem("InfiniteEPG-debug-settings-v2");
-    _debugSettings = _defaultDebugSettings;
+    _debugSettings = copyDefaults();
     setCurrentSandbox(getSandboxes()[0]);
    };
 
