@@ -26,9 +26,10 @@
       proxy: "https://cisco-itk-proxy.herokuapp.com/",
       fakeVideo: true,
       fakeVideosList: [
-        {"type":"application/x-mpegURL", "src":"https://s3-eu-west-1.amazonaws.com/infinite-epg/lasvegas-vod/lasvegas.m3u8"},
-        { "type": 'video/mp4', src: 'https://s3-eu-west-1.amazonaws.com/infinite-epg/small.mp4' },
-        { "type": 'video/mp4', src: 'https://s3-eu-west-1.amazonaws.com/infinite-epg/big_buck_bunny.mp4' }
+        {"type":"application/x-mpegURL", "src":"http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8"},
+        {"type":"application/x-mpegURL", "src":"http://playertest.longtailvideo.com/adaptive/oceans_aes/oceans_aes.m3u8"},
+        {"type":"application/x-mpegURL", "src":"http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8"},
+        {"type":"application/x-mpegURL", "src":"http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8"},
       ]
     };
 

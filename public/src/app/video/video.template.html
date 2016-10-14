@@ -6,11 +6,14 @@
     </div>
   </div>
   <div ng-show="vm.showUi" class="row well toto">
-    <div class="col-xs-12 col-sm-7">
+    <div class="col-xs-12 col-sm-8">
     <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
-      <p class="lead">{{vm.videosrc.src}}</p>
-      <div ng-show="vm.fakeVideo" class="alert alert-info">Fake Video Playing</div>
-      <div ng-show="vm.adSuiteDetails" class="alert alert-warning">Adverstisements augmented video</div>
+      
+      <p style="word-wrap: break-word;">
+
+        <span class="badge pull-right text-warning" ng-show="vm.fakeVideo">Fake Video</span>&nbsp;&nbsp;
+      <span class="badge pull-right text-info" ng-show="vm.adSuiteDetails">AdSuite Augmented</span>
+      {{vm.videosrc.src}}</p>
       <uib-accordion >
         <div uib-accordion-group class="panel-default" heading="Test Zone">
           <div class="form-group">
@@ -30,8 +33,8 @@
         </div>
       </uib-accordion>
       </div>
-    <div class="col-xs-12 col-sm-5">
-    <p class="lead">The IH Platform provide video content in HLS format. Support in Chrome is software based</p>
+    <div class="col-xs-12 col-sm-4">
+    <p><i class="glyphicon glyphicon-warning-sign text-warning"></i> The IH Platform provide video content in HLS format. Support in Chrome is software based</p>
     <div ng-show="vm.playSession" class="panel panel-default">
       <div class="panel-heading">Play Session Details</div>
       <div class="panel-body">
