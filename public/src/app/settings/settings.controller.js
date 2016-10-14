@@ -3,8 +3,8 @@
         .module("InfiniteEPG")
         .controller("settingsCtrl", settingsCtrl);
 
-    settingsCtrl.$inject = ["$scope","$location", "authentication", "settings", "adsuite"];
-    function settingsCtrl($scope, $location, authentication, settings, adsuite) {
+    settingsCtrl.$inject = ["$scope", "authentication", "settings", "adsuite"];
+    function settingsCtrl($scope, authentication, settings, adsuite) {
         var vm = this;
 
         vm.pageHeader = {

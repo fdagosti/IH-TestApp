@@ -1,11 +1,9 @@
 ((function(){
 
-angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, $timeout, devices, settings, adsuite, hotkeys) {
+angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routeParams, $timeout, hotkeys, video) {
    var vm = this;
-    vm.fakeVideo = settings.getDebugSettings().fakeVideo?settings.getRandomFakeVideo():null;
 
-    // retrieving the currently playing content from the video tag itself
-    vm.videosrc = {src: videojs('video-background').src()};
+    vm.currentVideoDetails = video.getCurrentVideoDetails();
 
     hotkeys.bindTo($scope)
     .add({
@@ -14,53 +12,19 @@ angular.module('InfiniteEPG').controller('videoCtrl', function($scope, $routePar
       callback: function() {vm.showUi?vm.showUi=false:vm.showTemporaryUI();}
     })
 
-  vm.playLocator = function(locator){
-    devices.getPlaySession(locator)
-      .then(function(response){
-        vm.playSession = response.data;
-        var videoToPlay = {"type":"application/x-mpegURL", "src":settings.getProxy()+vm.playSession.links.playUrl.href};
-        if (vm.fakeVideo){
-          videoToPlay = vm.fakeVideo;
-        }
-        vm.insertLinkIntoVideoTag(videoToPlay);        
-      }, function(error){
-        if (!vm.fakeVideo){
-          var errString = (error.status && error.statusText)?error.status+" "+error.statusText:error.toString;
-          vm.error = "Could not retrieve playSession from IH server. Consider to log out and log in again. "+ errString;
-        }else{
-          vm.insertLinkIntoVideoTag(vm.fakeVideo);        
-        }
-      });
+  vm.playLocator = function(locator, fakeSrc){
+    vm.currentVideoDetails.playbackError = null;
+    vm.currentVideoDetails = {};
+    video.playLocator(locator, fakeSrc)
+    .then(function(response){
+      vm.currentVideoDetails = response;
+    }, function(error){
+      vm.currentVideoDetails.playbackError = error;
+    })
     };
 
   vm.insertLinkIntoVideoTag = function(src){
-    if (!src){
-      if (vm.videosrc.src.endsWith("m3u8")){
-        src = {"type":"application/x-mpegURL", "src":vm.videosrc.src};
-      }else{
-        src = {"type":"video/mp4", "src":vm.videosrc.src};
-      }
-    }
-
-    if (adsuite.isEnabled() && src.src.endsWith("m3u8")){
-      adsuite.createAdSession(src.src)
-      .then(function(response){
-        vm.adSuiteDetails = response.data;
-        src.src = vm.adSuiteDetails.links.play.href;
-        _playVideo(src);
-      }, function(error){
-
-      });
-    }else{
-      _playVideo(src);
-    }
-  };
-
-  var _playVideo = function(videoSrc){
-    var player = videojs('video-background');
-    player.src(videoSrc);
-    player.play();
-    vm.videosrc = videoSrc;
+    vm.playLocator(null, src);
   };
 
   var locator = $routeParams.locator;

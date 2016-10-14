@@ -19,9 +19,9 @@
     var copyDefaults = function(){
       return {
         enabled : _adSuiteDefaults.enabled,
-      baseUrl: _adSuiteDefaults.baseUrl,
-      currentUser:_adSuiteDefaults.currentUser,
-      users: _adSuiteDefaults.users
+        baseUrl: _adSuiteDefaults.baseUrl,
+        currentUser:_adSuiteDefaults.currentUser,
+        users: _adSuiteDefaults.users
       };
     };
 

@@ -7,19 +7,19 @@
   </div>
   <div ng-show="vm.showUi" class="row well toto">
     <div class="col-xs-12 col-sm-8">
-    <div role="alert" ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+    <div role="alert" ng-show="vm.currentVideoDetails.playbackError" class="alert alert-danger">{{vm.currentVideoDetails.playbackError.statusText}}</div>
       
       <p style="word-wrap: break-word;">
 
-        <span class="badge pull-right text-warning" ng-show="vm.fakeVideo">Fake Video</span>&nbsp;&nbsp;
-      <span class="badge pull-right text-info" ng-show="vm.adSuiteDetails">AdSuite Augmented</span>
-      {{vm.videosrc.src}}</p>
+        <span class="badge pull-right text-warning" ng-show="vm.currentVideoDetails.fakeVideo">Fake Video</span>&nbsp;&nbsp;
+      <span class="badge pull-right text-info" ng-show="vm.currentVideoDetails.adSuiteDetails">AdSuite Augmented</span>
+      {{vm.currentVideoDetails.currentSrc.src}}</p>
       <uib-accordion >
         <div uib-accordion-group class="panel-default" heading="Test Zone">
           <div class="form-group">
             <label for="exampleInputEmail1">Put here any video URL to play it</label>
             <div class="input-group">
-              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Video URL" ng-model="vm.videosrc.src">
+              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Video URL" ng-model="vm.currentVideoDetails.currentSrc.src">
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="vm.insertLinkIntoVideoTag()"><span class="glyphicon glyphicon-play"/></button>
               </span>
