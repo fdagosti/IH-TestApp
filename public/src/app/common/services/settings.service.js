@@ -14,7 +14,7 @@
     ];
 
     var _saveDebugSettings = function() {
-            $window.localStorage["InfiniteEPG-debug-settings-v1"] = JSON.stringify(_debugSettings);
+            $window.localStorage["InfiniteEPG-debug-settings-v2"] = JSON.stringify(_debugSettings);
     };
 
     var getSandboxes = function(){
@@ -38,7 +38,7 @@
 
    var getCurrentSandbox = function(){
 
-      var t = $window.localStorage["InfiniteEPG-debug-settings-v1"];
+      var t = $window.localStorage["InfiniteEPG-debug-settings-v2"];
       if (t){
           _debugSettings = JSON.parse(t);
           return _debugSettings.currentSandbox;
@@ -46,7 +46,7 @@
    };
 
    var resetDebugSettings = function(){
-    $window.localStorage.removeItem("InfiniteEPG-debug-settings-v1");
+    $window.localStorage.removeItem("InfiniteEPG-debug-settings-v2");
     _debugSettings = _defaultDebugSettings;
     setCurrentSandbox(getSandboxes()[0]);
    };
