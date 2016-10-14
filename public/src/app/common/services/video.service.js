@@ -66,7 +66,7 @@ var playLocator = function(locator, fakeSrc){
         adSuiteDetails = response.data;
         // Strangely, AdSuite sometimes answers with no errors, but does not provide any answer
         // let's fallback in error in this case
-        if (!adSuiteDetails.links.play.href){
+        if (!adSuiteDetails.links){
           var error = {statusText: "AdSuite Error"};
           _stopVideo(error);
           reject(error);
