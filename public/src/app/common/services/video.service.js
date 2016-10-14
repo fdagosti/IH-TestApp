@@ -24,6 +24,7 @@ var getCurrentVideoDetails = function(){
 }
 
 var playLocator = function(locator, fakeSrc){
+    _stopVideo(null);
     return $q(function(resolve, reject){
       fakeVideo = fakeSrc || (settings.getDebugSettings().fakeVideo?settings.getRandomFakeVideo():null);
       if (fakeVideo){
@@ -84,7 +85,6 @@ var playLocator = function(locator, fakeSrc){
   };
 
   var _playVideo = function(videoSrc){
-    playbackError = null;
     var player = videojs('video-background');
     currentVideoTagSrc = videoSrc;
     player.src(videoSrc);
