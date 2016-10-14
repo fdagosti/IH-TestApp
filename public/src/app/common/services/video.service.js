@@ -24,7 +24,7 @@ var getCurrentVideoDetails = function(){
 }
 
 var playLocator = function(locator, fakeSrc){
-    _stopVideo(null);
+    playbackError = null;
     return $q(function(resolve, reject){
       fakeVideo = fakeSrc || (settings.getDebugSettings().fakeVideo?settings.getRandomFakeVideo():null);
       if (fakeVideo){
@@ -64,9 +64,17 @@ var playLocator = function(locator, fakeSrc){
       adsuite.createAdSession(src.src)
       .then(function(response){
         adSuiteDetails = response.data;
-        src.src = adSuiteDetails.links.play.href;
-        _playVideo(src);
-        resolve(getCurrentVideoDetails());
+        // Strangely, AdSuite sometimes answers with no errors, but does not provide any answer
+        // let's fallback in error in this case
+        if (!adSuiteDetails.links.play.href){
+          var error = {statusText: "AdSuite Error"};
+          _stopVideo(error);
+          reject(error);
+        }else{
+          src.src = adSuiteDetails.links.play.href;
+          _playVideo(src);
+          resolve(getCurrentVideoDetails());
+        }
       }, function(error){
         _stopVideo(error);
         reject(error);
