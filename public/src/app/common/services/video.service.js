@@ -35,7 +35,8 @@ var playLocator = function(locator, fakeSrc){
       devices.getPlaySession(locator)
         .then(function(response){
           var playSession = response.data;
-          var videoToPlay = {"type":"application/x-mpegURL", "src":settings.getProxy()+playSession.links.playUrl.href};
+          console.log("playSession ",playSession);
+          var videoToPlay = {"type":"application/x-mpegURL", "src":settings.getProxy()+playSession._links.playUrl.href};
           _insertLinkIntoVideoTag(videoToPlay, resolve, reject);        
         }, function(error){
             _stopVideo(error);
