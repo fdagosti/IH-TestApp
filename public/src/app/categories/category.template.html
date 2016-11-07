@@ -20,7 +20,7 @@
           <p><strong>Adult?</strong> {{subCat.isAdult}} &nbsp;&nbsp;   <strong>Leaf?</strong> {{subCat.leaf}}</p>
           links: 
           <ul class="list-unstyled">
-            <li ng-repeat="(key, value) in subCat.links">
+            <li ng-repeat="(key, value) in subCat._links">
               <a   ng-href="/#{{value.href}}">{{key}}</a>
             </li>
           </ul>

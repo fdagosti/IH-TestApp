@@ -22,7 +22,7 @@
           <p><strong>Adult?</strong> {{category.isAdult}} &nbsp;&nbsp;   <strong>Leaf?</strong> {{category.leaf}}</p>
           links: 
           <ul class="list-unstyled">
-            <li ng-repeat="(key, value) in category.links">
+            <li ng-repeat="(key, value) in category._links">
               <a   ng-href="/#{{value.href}}">{{key}}</a>
             </li>
           </li>
